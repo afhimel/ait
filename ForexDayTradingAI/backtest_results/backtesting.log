@@ -1,0 +1,368 @@
+2025-12-30 11:46:43,324 - INFO - Starting backtest for GBPUSD
+2025-12-30 11:46:47,111 - INFO - Loading DAY_TRADING model for GBPUSD
+2025-12-30 11:46:47,269 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 11:46:47,348 - INFO - Successfully loaded model for GBPUSD
+2025-12-30 11:46:47,348 - INFO - Feature count: 44
+2025-12-30 11:46:47,359 - INFO - Loaded backtest CSV: C:/Users/WALTON/OneDrive/Documents/n/data/GBPUSD_M15_2 month_converted.csv with shape (591, 7)
+2025-12-30 11:46:47,372 - INFO - Validated backtest data: 591 rows
+2025-12-30 11:46:47,398 - INFO - Engineered 45 features for backtesting
+2025-12-30 11:46:47,398 - INFO - Loaded trained scaler for GBPUSD
+2025-12-30 11:46:47,400 - INFO - Running backtest on 392 bars...
+2025-12-30 11:46:47,735 - INFO - Trade 1: BUY PNL: $48.00 Balance: $58.00
+2025-12-30 11:46:47,825 - INFO - Trade 2: BUY PNL: $12.00 Balance: $70.00
+2025-12-30 11:46:48,073 - INFO - Trade 3: BUY PNL: $275.00 Balance: $345.00
+2025-12-30 11:46:48,314 - INFO - Trade 4: SELL PNL: $211.00 Balance: $556.00
+2025-12-30 11:46:48,402 - INFO - Trade 5: BUY PNL: $381.00 Balance: $937.00
+2025-12-30 11:46:48,482 - INFO - Backtest complete: 5 trades executed
+2025-12-30 11:46:48,485 - INFO - Final balance: $937.00 (Starting: $10.00)
+2025-12-30 11:47:08,983 - INFO - Starting backtest for GBPUSD
+2025-12-30 11:47:08,983 - INFO - Loading DAY_TRADING model for GBPUSD
+2025-12-30 11:47:09,085 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 11:47:09,172 - INFO - Successfully loaded model for GBPUSD
+2025-12-30 11:47:09,174 - INFO - Feature count: 44
+2025-12-30 11:47:09,178 - INFO - Loaded backtest CSV: C:/Users/WALTON/OneDrive/Documents/n/data/GBPUSD_M15_2 month_converted.csv with shape (591, 7)
+2025-12-30 11:47:09,184 - INFO - Validated backtest data: 591 rows
+2025-12-30 11:47:09,212 - INFO - Engineered 45 features for backtesting
+2025-12-30 11:47:09,214 - INFO - Loaded trained scaler for GBPUSD
+2025-12-30 11:47:09,214 - INFO - Running backtest on 392 bars...
+2025-12-30 11:47:09,795 - INFO - Trade 1: BUY PNL: $1.20 Balance: $11.20
+2025-12-30 11:47:09,898 - INFO - Trade 2: BUY PNL: $-2.40 Balance: $8.80
+2025-12-30 11:47:10,188 - INFO - Trade 3: BUY PNL: $23.90 Balance: $32.70
+2025-12-30 11:47:10,479 - INFO - Trade 4: SELL PNL: $17.50 Balance: $50.20
+2025-12-30 11:47:10,587 - INFO - Trade 5: BUY PNL: $34.50 Balance: $84.70
+2025-12-30 11:47:10,692 - INFO - Backtest complete: 5 trades executed
+2025-12-30 11:47:10,696 - INFO - Final balance: $84.70 (Starting: $10.00)
+2025-12-30 11:50:33,499 - INFO - Starting backtest for GBPUSD
+2025-12-30 11:50:33,500 - INFO - Loading DAY_TRADING model for GBPUSD
+2025-12-30 11:50:33,629 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 11:50:33,742 - INFO - Successfully loaded model for GBPUSD
+2025-12-30 11:50:33,746 - INFO - Feature count: 44
+2025-12-30 11:50:33,762 - INFO - Loaded backtest CSV: C:/Users/WALTON/Downloads/EURUSD_FIXED (1).csv with shape (7976, 7)
+2025-12-30 11:50:33,771 - INFO - Validated backtest data: 7976 rows
+2025-12-30 11:50:33,818 - INFO - Engineered 45 features for backtesting
+2025-12-30 11:50:33,823 - INFO - Loaded trained scaler for GBPUSD
+2025-12-30 11:50:33,826 - INFO - Running backtest on 7777 bars...
+2025-12-30 11:50:34,368 - INFO - Trade 1: BUY PNL: $1.20 Balance: $11.20
+2025-12-30 11:50:34,471 - INFO - Trade 2: BUY PNL: $34.50 Balance: $45.70
+2025-12-30 11:50:34,578 - INFO - Trade 3: BUY PNL: $34.50 Balance: $80.20
+2025-12-30 11:50:34,690 - INFO - Trade 4: BUY PNL: $-8.20 Balance: $72.00
+2025-12-30 11:50:34,789 - INFO - Trade 5: BUY PNL: $3.70 Balance: $75.70
+2025-12-30 11:50:34,892 - INFO - Trade 6: BUY PNL: $-25.50 Balance: $50.20
+2025-12-30 11:50:34,995 - INFO - Trade 7: BUY PNL: $-19.70 Balance: $30.50
+2025-12-30 11:50:35,096 - INFO - Trade 8: BUY PNL: $-9.40 Balance: $21.10
+2025-12-30 11:50:35,196 - INFO - Trade 9: BUY PNL: $-25.50 Balance: $-4.40
+2025-12-30 11:50:35,295 - INFO - Trade 10: BUY PNL: $34.50 Balance: $30.10
+2025-12-30 11:50:35,391 - INFO - Trade 11: BUY PNL: $-0.60 Balance: $29.50
+2025-12-30 11:50:35,498 - INFO - Trade 12: BUY PNL: $-25.50 Balance: $4.00
+2025-12-30 11:50:35,605 - INFO - Trade 13: BUY PNL: $34.50 Balance: $38.50
+2025-12-30 11:50:35,798 - INFO - Trade 14: BUY PNL: $-25.50 Balance: $13.00
+2025-12-30 11:50:35,993 - INFO - Trade 15: BUY PNL: $18.10 Balance: $31.10
+2025-12-30 11:50:36,097 - INFO - Trade 16: BUY PNL: $-12.90 Balance: $18.20
+2025-12-30 11:50:36,202 - INFO - Trade 17: BUY PNL: $-25.50 Balance: $-7.30
+2025-12-30 11:50:36,298 - INFO - Trade 18: BUY PNL: $-25.50 Balance: $-32.80
+2025-12-30 11:50:36,393 - INFO - Trade 19: BUY PNL: $-7.40 Balance: $-40.20
+2025-12-30 11:50:36,599 - INFO - Trade 20: BUY PNL: $-25.50 Balance: $-65.70
+2025-12-30 11:50:36,696 - INFO - Trade 21: BUY PNL: $12.80 Balance: $-52.90
+2025-12-30 11:50:36,789 - INFO - Trade 22: BUY PNL: $-0.60 Balance: $-53.50
+2025-12-30 11:50:36,885 - INFO - Trade 23: BUY PNL: $-25.50 Balance: $-79.00
+2025-12-30 11:50:36,990 - INFO - Trade 24: BUY PNL: $-25.50 Balance: $-104.50
+2025-12-30 11:50:37,098 - INFO - Trade 25: BUY PNL: $-25.50 Balance: $-130.00
+2025-12-30 11:50:37,199 - INFO - Trade 26: BUY PNL: $11.40 Balance: $-118.60
+2025-12-30 11:50:37,301 - INFO - Trade 27: BUY PNL: $-25.50 Balance: $-144.10
+2025-12-30 11:50:37,405 - INFO - Trade 28: BUY PNL: $-10.90 Balance: $-155.00
+2025-12-30 11:50:37,505 - INFO - Trade 29: BUY PNL: $4.80 Balance: $-150.20
+2025-12-30 11:50:37,609 - INFO - Trade 30: BUY PNL: $-25.50 Balance: $-175.70
+2025-12-30 11:50:37,705 - INFO - Trade 31: BUY PNL: $-25.50 Balance: $-201.20
+2025-12-30 11:50:37,799 - INFO - Trade 32: SELL PNL: $-0.00 Balance: $-201.20
+2025-12-30 11:50:37,997 - INFO - Trade 33: BUY PNL: $2.40 Balance: $-198.80
+2025-12-30 11:50:38,099 - INFO - Trade 34: BUY PNL: $8.00 Balance: $-190.80
+2025-12-30 11:50:38,197 - INFO - Trade 35: BUY PNL: $-25.50 Balance: $-216.30
+2025-12-30 11:50:38,294 - INFO - Trade 36: BUY PNL: $-25.50 Balance: $-241.80
+2025-12-30 11:50:38,397 - INFO - Trade 37: BUY PNL: $10.60 Balance: $-231.20
+2025-12-30 11:50:38,497 - INFO - Trade 38: BUY PNL: $1.40 Balance: $-229.80
+2025-12-30 11:50:38,600 - INFO - Trade 39: BUY PNL: $23.40 Balance: $-206.40
+2025-12-30 11:50:38,699 - INFO - Trade 40: SELL PNL: $-25.50 Balance: $-231.90
+2025-12-30 11:50:38,895 - INFO - Trade 41: BUY PNL: $34.50 Balance: $-197.40
+2025-12-30 11:50:38,992 - INFO - Trade 42: BUY PNL: $-25.50 Balance: $-222.90
+2025-12-30 11:50:39,089 - INFO - Trade 43: BUY PNL: $24.00 Balance: $-198.90
+2025-12-30 11:50:39,193 - INFO - Trade 44: SELL PNL: $24.50 Balance: $-174.40
+2025-12-30 11:50:39,295 - INFO - Trade 45: BUY PNL: $2.50 Balance: $-171.90
+2025-12-30 11:50:39,398 - INFO - Trade 46: BUY PNL: $-10.10 Balance: $-182.00
+2025-12-30 11:50:39,503 - INFO - Trade 47: BUY PNL: $19.90 Balance: $-162.10
+2025-12-30 11:50:39,606 - INFO - Trade 48: BUY PNL: $-25.50 Balance: $-187.60
+2025-12-30 11:50:39,711 - INFO - Trade 49: BUY PNL: $-25.50 Balance: $-213.10
+2025-12-30 11:50:39,811 - INFO - Trade 50: BUY PNL: $7.70 Balance: $-205.40
+2025-12-30 11:50:39,908 - INFO - Trade 51: BUY PNL: $-9.10 Balance: $-214.50
+2025-12-30 11:50:40,008 - INFO - Trade 52: BUY PNL: $1.10 Balance: $-213.40
+2025-12-30 11:50:40,120 - INFO - Trade 53: BUY PNL: $-25.50 Balance: $-238.90
+2025-12-30 11:50:40,218 - INFO - Trade 54: SELL PNL: $-12.50 Balance: $-251.40
+2025-12-30 11:50:40,314 - INFO - Trade 55: SELL PNL: $-25.50 Balance: $-276.90
+2025-12-30 11:50:40,415 - INFO - Trade 56: SELL PNL: $4.50 Balance: $-272.40
+2025-12-30 11:50:40,514 - INFO - Trade 57: BUY PNL: $-2.30 Balance: $-274.70
+2025-12-30 11:50:40,614 - INFO - Trade 58: BUY PNL: $-25.50 Balance: $-300.20
+2025-12-30 11:50:40,814 - INFO - Trade 59: BUY PNL: $-25.50 Balance: $-325.70
+2025-12-30 11:50:40,915 - INFO - Trade 60: BUY PNL: $7.30 Balance: $-318.40
+2025-12-30 11:50:41,110 - INFO - Trade 61: BUY PNL: $11.90 Balance: $-306.50
+2025-12-30 11:50:41,216 - INFO - Trade 62: BUY PNL: $-12.10 Balance: $-318.60
+2025-12-30 11:50:41,327 - INFO - Trade 63: BUY PNL: $-25.50 Balance: $-344.10
+2025-12-30 11:50:41,425 - INFO - Trade 64: BUY PNL: $-25.50 Balance: $-369.60
+2025-12-30 11:50:41,517 - INFO - Trade 65: BUY PNL: $-7.40 Balance: $-377.00
+2025-12-30 11:50:41,624 - INFO - Trade 66: BUY PNL: $-25.50 Balance: $-402.50
+2025-12-30 11:50:41,727 - INFO - Trade 67: BUY PNL: $12.00 Balance: $-390.50
+2025-12-30 11:50:41,834 - INFO - Trade 68: BUY PNL: $-25.50 Balance: $-416.00
+2025-12-30 11:50:41,929 - INFO - Trade 69: BUY PNL: $-25.50 Balance: $-441.50
+2025-12-30 11:50:42,036 - INFO - Trade 70: BUY PNL: $11.50 Balance: $-430.00
+2025-12-30 11:50:42,133 - INFO - Trade 71: BUY PNL: $10.90 Balance: $-419.10
+2025-12-30 11:50:42,229 - INFO - Trade 72: BUY PNL: $-11.50 Balance: $-430.60
+2025-12-30 11:50:42,334 - INFO - Trade 73: BUY PNL: $-20.40 Balance: $-451.00
+2025-12-30 11:50:42,431 - INFO - Trade 74: BUY PNL: $8.90 Balance: $-442.10
+2025-12-30 11:50:42,528 - INFO - Trade 75: BUY PNL: $-25.50 Balance: $-467.60
+2025-12-30 11:50:42,631 - INFO - Trade 76: BUY PNL: $-12.40 Balance: $-480.00
+2025-12-30 11:50:42,734 - INFO - Trade 77: BUY PNL: $-2.60 Balance: $-482.60
+2025-12-30 11:50:42,828 - INFO - Trade 78: BUY PNL: $34.50 Balance: $-448.10
+2025-12-30 11:50:43,131 - INFO - Trade 79: BUY PNL: $-25.50 Balance: $-473.60
+2025-12-30 11:50:43,320 - INFO - Trade 80: BUY PNL: $34.50 Balance: $-439.10
+2025-12-30 11:50:43,414 - INFO - Trade 81: BUY PNL: $-25.50 Balance: $-464.60
+2025-12-30 11:50:43,536 - INFO - Trade 82: BUY PNL: $-25.50 Balance: $-490.10
+2025-12-30 11:50:43,659 - INFO - Trade 83: BUY PNL: $-9.60 Balance: $-499.70
+2025-12-30 11:50:43,760 - INFO - Trade 84: BUY PNL: $-25.50 Balance: $-525.20
+2025-12-30 11:50:43,884 - INFO - Trade 85: BUY PNL: $17.50 Balance: $-507.70
+2025-12-30 11:50:44,119 - INFO - Trade 86: BUY PNL: $-8.30 Balance: $-516.00
+2025-12-30 11:50:44,232 - INFO - Trade 87: BUY PNL: $27.40 Balance: $-488.60
+2025-12-30 11:50:44,374 - INFO - Trade 88: BUY PNL: $-25.50 Balance: $-514.10
+2025-12-30 11:50:44,507 - INFO - Trade 89: BUY PNL: $-25.50 Balance: $-539.60
+2025-12-30 11:50:44,608 - INFO - Trade 90: BUY PNL: $10.30 Balance: $-529.30
+2025-12-30 11:50:44,916 - INFO - Trade 91: BUY PNL: $29.40 Balance: $-499.90
+2025-12-30 11:50:45,020 - INFO - Trade 92: BUY PNL: $-25.50 Balance: $-525.40
+2025-12-30 11:50:45,126 - INFO - Trade 93: BUY PNL: $-2.30 Balance: $-527.70
+2025-12-30 11:50:45,233 - INFO - Trade 94: BUY PNL: $-25.50 Balance: $-553.20
+2025-12-30 11:50:45,555 - INFO - Trade 95: BUY PNL: $-18.80 Balance: $-572.00
+2025-12-30 11:50:45,663 - INFO - Trade 96: BUY PNL: $-25.50 Balance: $-597.50
+2025-12-30 11:50:45,776 - INFO - Trade 97: BUY PNL: $34.50 Balance: $-563.00
+2025-12-30 11:50:45,889 - INFO - Trade 98: BUY PNL: $-20.10 Balance: $-583.10
+2025-12-30 11:50:46,009 - INFO - Trade 99: BUY PNL: $-13.70 Balance: $-596.80
+2025-12-30 11:50:46,131 - INFO - Trade 100: BUY PNL: $-14.70 Balance: $-611.50
+2025-12-30 11:50:46,365 - INFO - Trade 101: BUY PNL: $13.00 Balance: $-598.50
+2025-12-30 11:50:46,479 - INFO - Trade 102: BUY PNL: $13.20 Balance: $-585.30
+2025-12-30 11:50:46,591 - INFO - Trade 103: BUY PNL: $34.50 Balance: $-550.80
+2025-12-30 11:50:46,815 - INFO - Trade 104: BUY PNL: $9.30 Balance: $-541.50
+2025-12-30 11:50:46,931 - INFO - Trade 105: BUY PNL: $5.50 Balance: $-536.00
+2025-12-30 11:50:47,049 - INFO - Trade 106: BUY PNL: $22.30 Balance: $-513.70
+2025-12-30 11:50:47,275 - INFO - Trade 107: BUY PNL: $-25.50 Balance: $-539.20
+2025-12-30 11:50:47,385 - INFO - Trade 108: BUY PNL: $-25.50 Balance: $-564.70
+2025-12-30 11:50:47,498 - INFO - Trade 109: BUY PNL: $-25.50 Balance: $-590.20
+2025-12-30 11:50:47,608 - INFO - Trade 110: SELL PNL: $-20.40 Balance: $-610.60
+2025-12-30 11:50:47,825 - INFO - Trade 111: BUY PNL: $-25.50 Balance: $-636.10
+2025-12-30 11:50:47,935 - INFO - Trade 112: BUY PNL: $-1.10 Balance: $-637.20
+2025-12-30 11:50:48,051 - INFO - Trade 113: SELL PNL: $5.00 Balance: $-632.20
+2025-12-30 11:50:48,161 - INFO - Trade 114: SELL PNL: $-25.50 Balance: $-657.70
+2025-12-30 11:50:48,390 - INFO - Trade 115: BUY PNL: $8.60 Balance: $-649.10
+2025-12-30 11:50:48,505 - INFO - Trade 116: BUY PNL: $-25.50 Balance: $-674.60
+2025-12-30 11:50:48,616 - INFO - Trade 117: BUY PNL: $7.80 Balance: $-666.80
+2025-12-30 11:50:48,731 - INFO - Trade 118: BUY PNL: $-1.90 Balance: $-668.70
+2025-12-30 11:50:48,843 - INFO - Trade 119: BUY PNL: $21.20 Balance: $-647.50
+2025-12-30 11:50:48,958 - INFO - Trade 120: BUY PNL: $8.00 Balance: $-639.50
+2025-12-30 11:50:49,073 - INFO - Trade 121: BUY PNL: $-16.00 Balance: $-655.50
+2025-12-30 11:50:49,187 - INFO - Trade 122: BUY PNL: $34.50 Balance: $-621.00
+2025-12-30 11:50:49,303 - INFO - Trade 123: BUY PNL: $34.50 Balance: $-586.50
+2025-12-30 11:50:49,419 - INFO - Trade 124: BUY PNL: $34.50 Balance: $-552.00
+2025-12-30 11:50:49,528 - INFO - Trade 125: BUY PNL: $-14.70 Balance: $-566.70
+2025-12-30 11:50:49,642 - INFO - Trade 126: BUY PNL: $-25.50 Balance: $-592.20
+2025-12-30 11:50:49,868 - INFO - Trade 127: BUY PNL: $-25.50 Balance: $-617.70
+2025-12-30 11:50:49,983 - INFO - Trade 128: BUY PNL: $-25.50 Balance: $-643.20
+2025-12-30 11:50:50,097 - INFO - Trade 129: SELL PNL: $34.50 Balance: $-608.70
+2025-12-30 11:50:50,209 - INFO - Trade 130: BUY PNL: $5.30 Balance: $-603.40
+2025-12-30 11:50:50,322 - INFO - Trade 131: BUY PNL: $-25.50 Balance: $-628.90
+2025-12-30 11:50:50,445 - INFO - Trade 132: BUY PNL: $-25.50 Balance: $-654.40
+2025-12-30 11:50:50,557 - INFO - Trade 133: BUY PNL: $-15.40 Balance: $-669.80
+2025-12-30 11:50:50,668 - INFO - Trade 134: BUY PNL: $-15.10 Balance: $-684.90
+2025-12-30 11:50:50,785 - INFO - Trade 135: BUY PNL: $34.50 Balance: $-650.40
+2025-12-30 11:50:50,895 - INFO - Trade 136: BUY PNL: $13.20 Balance: $-637.20
+2025-12-30 11:50:51,009 - INFO - Trade 137: BUY PNL: $1.70 Balance: $-635.50
+2025-12-30 11:50:51,126 - INFO - Trade 138: BUY PNL: $-25.50 Balance: $-661.00
+2025-12-30 11:50:51,240 - INFO - Trade 139: BUY PNL: $3.70 Balance: $-657.30
+2025-12-30 11:50:51,465 - INFO - Trade 140: BUY PNL: $-19.30 Balance: $-676.60
+2025-12-30 11:50:51,574 - INFO - Trade 141: BUY PNL: $-25.50 Balance: $-702.10
+2025-12-30 11:50:51,801 - INFO - Trade 142: BUY PNL: $1.50 Balance: $-700.60
+2025-12-30 11:50:51,912 - INFO - Trade 143: BUY PNL: $-13.90 Balance: $-714.50
+2025-12-30 11:50:52,027 - INFO - Trade 144: BUY PNL: $-25.50 Balance: $-740.00
+2025-12-30 11:50:52,135 - INFO - Trade 145: BUY PNL: $-25.50 Balance: $-765.50
+2025-12-30 11:50:52,249 - INFO - Trade 146: BUY PNL: $5.60 Balance: $-759.90
+2025-12-30 11:50:52,359 - INFO - Trade 147: BUY PNL: $-4.20 Balance: $-764.10
+2025-12-30 11:50:52,470 - INFO - Trade 148: BUY PNL: $12.60 Balance: $-751.50
+2025-12-30 11:50:52,584 - INFO - Trade 149: BUY PNL: $14.60 Balance: $-736.90
+2025-12-30 11:50:52,697 - INFO - Trade 150: BUY PNL: $-9.70 Balance: $-746.60
+2025-12-30 11:50:52,808 - INFO - Trade 151: BUY PNL: $2.70 Balance: $-743.90
+2025-12-30 11:50:52,919 - INFO - Trade 152: SELL PNL: $-7.20 Balance: $-751.10
+2025-12-30 11:50:53,037 - INFO - Trade 153: BUY PNL: $7.40 Balance: $-743.70
+2025-12-30 11:50:53,262 - INFO - Trade 154: BUY PNL: $-1.90 Balance: $-745.60
+2025-12-30 11:50:53,372 - INFO - Trade 155: BUY PNL: $-2.90 Balance: $-748.50
+2025-12-30 11:50:53,482 - INFO - Trade 156: BUY PNL: $34.50 Balance: $-714.00
+2025-12-30 11:50:53,810 - INFO - Trade 157: BUY PNL: $17.30 Balance: $-696.70
+2025-12-30 11:50:53,925 - INFO - Trade 158: BUY PNL: $-25.50 Balance: $-722.20
+2025-12-30 11:50:54,038 - INFO - Trade 159: BUY PNL: $-25.50 Balance: $-747.70
+2025-12-30 11:50:54,155 - INFO - Trade 160: BUY PNL: $0.00 Balance: $-747.70
+2025-12-30 11:50:54,279 - INFO - Trade 161: BUY PNL: $17.80 Balance: $-729.90
+2025-12-30 11:50:54,396 - INFO - Trade 162: BUY PNL: $-1.70 Balance: $-731.60
+2025-12-30 11:50:54,506 - INFO - Trade 163: BUY PNL: $-25.50 Balance: $-757.10
+2025-12-30 11:50:54,731 - INFO - Trade 164: BUY PNL: $34.50 Balance: $-722.60
+2025-12-30 11:50:54,971 - INFO - Trade 165: BUY PNL: $-25.50 Balance: $-748.10
+2025-12-30 11:50:55,129 - INFO - Trade 166: BUY PNL: $-25.50 Balance: $-773.60
+2025-12-30 11:50:55,252 - INFO - Trade 167: BUY PNL: $-25.50 Balance: $-799.10
+2025-12-30 11:50:55,379 - INFO - Trade 168: BUY PNL: $-25.50 Balance: $-824.60
+2025-12-30 11:50:55,613 - INFO - Trade 169: BUY PNL: $-13.60 Balance: $-838.20
+2025-12-30 11:50:55,736 - INFO - Trade 170: BUY PNL: $17.80 Balance: $-820.40
+2025-12-30 11:50:55,853 - INFO - Trade 171: BUY PNL: $-16.20 Balance: $-836.60
+2025-12-30 11:50:55,970 - INFO - Trade 172: BUY PNL: $-25.50 Balance: $-862.10
+2025-12-30 11:50:56,104 - INFO - Trade 173: BUY PNL: $-25.50 Balance: $-887.60
+2025-12-30 11:50:56,215 - INFO - Trade 174: BUY PNL: $-25.50 Balance: $-913.10
+2025-12-30 11:50:56,337 - INFO - Trade 175: BUY PNL: $-4.50 Balance: $-917.60
+2025-12-30 11:50:56,460 - INFO - Trade 176: BUY PNL: $34.50 Balance: $-883.10
+2025-12-30 11:50:56,576 - INFO - Trade 177: BUY PNL: $4.70 Balance: $-878.40
+2025-12-30 11:50:56,832 - INFO - Trade 178: BUY PNL: $-25.50 Balance: $-903.90
+2025-12-30 11:50:56,943 - INFO - Trade 179: BUY PNL: $4.50 Balance: $-899.40
+2025-12-30 11:50:57,062 - INFO - Trade 180: BUY PNL: $8.90 Balance: $-890.50
+2025-12-30 11:50:57,192 - INFO - Trade 181: BUY PNL: $-25.50 Balance: $-916.00
+2025-12-30 11:50:57,303 - INFO - Trade 182: BUY PNL: $34.50 Balance: $-881.50
+2025-12-30 11:50:57,412 - INFO - Trade 183: BUY PNL: $6.70 Balance: $-874.80
+2025-12-30 11:50:57,529 - INFO - Trade 184: BUY PNL: $14.90 Balance: $-859.90
+2025-12-30 11:50:57,646 - INFO - Trade 185: BUY PNL: $-25.50 Balance: $-885.40
+2025-12-30 11:50:57,775 - INFO - Trade 186: SELL PNL: $-17.30 Balance: $-902.70
+2025-12-30 11:50:57,888 - INFO - Trade 187: BUY PNL: $6.60 Balance: $-896.10
+2025-12-30 11:50:57,999 - INFO - Trade 188: BUY PNL: $-12.90 Balance: $-909.00
+2025-12-30 11:50:58,142 - INFO - Trade 189: BUY PNL: $25.00 Balance: $-884.00
+2025-12-30 11:50:58,267 - INFO - Trade 190: BUY PNL: $16.10 Balance: $-867.90
+2025-12-30 11:50:58,425 - INFO - Trade 191: BUY PNL: $-9.50 Balance: $-877.40
+2025-12-30 11:50:58,555 - INFO - Trade 192: BUY PNL: $-25.50 Balance: $-902.90
+2025-12-30 11:50:58,678 - INFO - Trade 193: BUY PNL: $-25.50 Balance: $-928.40
+2025-12-30 11:50:58,941 - INFO - Trade 194: BUY PNL: $-14.00 Balance: $-942.40
+2025-12-30 11:50:59,052 - INFO - Trade 195: BUY PNL: $-12.30 Balance: $-954.70
+2025-12-30 11:50:59,167 - INFO - Trade 196: BUY PNL: $-11.20 Balance: $-965.90
+2025-12-30 11:50:59,383 - INFO - Trade 197: SELL PNL: $9.20 Balance: $-956.70
+2025-12-30 11:50:59,492 - INFO - Trade 198: BUY PNL: $-3.80 Balance: $-960.50
+2025-12-30 11:50:59,602 - INFO - Trade 199: BUY PNL: $-6.30 Balance: $-966.80
+2025-12-30 11:50:59,721 - INFO - Trade 200: BUY PNL: $-25.50 Balance: $-992.30
+2025-12-30 11:50:59,971 - INFO - Trade 201: BUY PNL: $-25.50 Balance: $-1017.80
+2025-12-30 11:51:00,102 - INFO - Trade 202: BUY PNL: $-13.90 Balance: $-1031.70
+2025-12-30 11:51:00,218 - INFO - Trade 203: BUY PNL: $21.30 Balance: $-1010.40
+2025-12-30 11:51:00,431 - INFO - Trade 204: BUY PNL: $-0.30 Balance: $-1010.70
+2025-12-30 11:51:00,546 - INFO - Trade 205: BUY PNL: $6.80 Balance: $-1003.90
+2025-12-30 11:51:00,669 - INFO - Trade 206: SELL PNL: $-23.30 Balance: $-1027.20
+2025-12-30 11:51:00,779 - INFO - Trade 207: BUY PNL: $-25.50 Balance: $-1052.70
+2025-12-30 11:51:00,891 - INFO - Trade 208: SELL PNL: $-25.50 Balance: $-1078.20
+2025-12-30 11:51:01,007 - INFO - Trade 209: BUY PNL: $0.80 Balance: $-1077.40
+2025-12-30 11:51:01,130 - INFO - Trade 210: BUY PNL: $12.10 Balance: $-1065.30
+2025-12-30 11:51:01,250 - INFO - Trade 211: BUY PNL: $-17.10 Balance: $-1082.40
+2025-12-30 11:51:01,364 - INFO - Trade 212: BUY PNL: $13.60 Balance: $-1068.80
+2025-12-30 11:51:01,475 - INFO - Trade 213: BUY PNL: $-23.20 Balance: $-1092.00
+2025-12-30 11:51:01,593 - INFO - Trade 214: BUY PNL: $-25.50 Balance: $-1117.50
+2025-12-30 11:51:01,711 - INFO - Trade 215: BUY PNL: $19.00 Balance: $-1098.50
+2025-12-30 11:51:01,828 - INFO - Trade 216: BUY PNL: $-25.50 Balance: $-1124.00
+2025-12-30 11:51:01,938 - INFO - Trade 217: BUY PNL: $16.40 Balance: $-1107.60
+2025-12-30 11:51:02,160 - INFO - Trade 218: BUY PNL: $-14.30 Balance: $-1121.90
+2025-12-30 11:51:02,268 - INFO - Trade 219: SELL PNL: $-5.40 Balance: $-1127.30
+2025-12-30 11:51:02,390 - INFO - Trade 220: BUY PNL: $-4.90 Balance: $-1132.20
+2025-12-30 11:51:02,503 - INFO - Trade 221: BUY PNL: $-25.50 Balance: $-1157.70
+2025-12-30 11:51:02,716 - INFO - Trade 222: BUY PNL: $-6.00 Balance: $-1163.70
+2025-12-30 11:51:02,827 - INFO - Trade 223: BUY PNL: $-12.10 Balance: $-1175.80
+2025-12-30 11:51:02,935 - INFO - Trade 224: BUY PNL: $-0.80 Balance: $-1176.60
+2025-12-30 11:51:03,050 - INFO - Trade 225: BUY PNL: $-25.50 Balance: $-1202.10
+2025-12-30 11:51:03,162 - INFO - Trade 226: BUY PNL: $-25.50 Balance: $-1227.60
+2025-12-30 11:51:03,273 - INFO - Trade 227: BUY PNL: $-7.00 Balance: $-1234.60
+2025-12-30 11:51:03,384 - INFO - Trade 228: BUY PNL: $3.90 Balance: $-1230.70
+2025-12-30 11:51:03,500 - INFO - Trade 229: BUY PNL: $-4.50 Balance: $-1235.20
+2025-12-30 11:51:03,617 - INFO - Trade 230: BUY PNL: $-10.10 Balance: $-1245.30
+2025-12-30 11:51:03,724 - INFO - Trade 231: BUY PNL: $11.10 Balance: $-1234.20
+2025-12-30 11:51:03,842 - INFO - Trade 232: BUY PNL: $10.00 Balance: $-1224.20
+2025-12-30 11:51:03,954 - INFO - Trade 233: BUY PNL: $19.40 Balance: $-1204.80
+2025-12-30 11:51:04,066 - INFO - Trade 234: BUY PNL: $-1.30 Balance: $-1206.10
+2025-12-30 11:51:04,177 - INFO - Trade 235: BUY PNL: $-15.90 Balance: $-1222.00
+2025-12-30 11:51:04,289 - INFO - Trade 236: BUY PNL: $5.10 Balance: $-1216.90
+2025-12-30 11:51:04,398 - INFO - Trade 237: SELL PNL: $-25.50 Balance: $-1242.40
+2025-12-30 11:51:04,512 - INFO - Backtest complete: 237 trades executed
+2025-12-30 11:51:04,517 - INFO - Final balance: $-1242.40 (Starting: $10.00)
+2025-12-30 11:53:12,268 - INFO - Starting backtest for GBPUSD
+2025-12-30 11:53:12,270 - INFO - Loading DAY_TRADING model for GBPUSD
+2025-12-30 11:53:12,390 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 11:53:12,488 - INFO - Successfully loaded model for GBPUSD
+2025-12-30 11:53:12,490 - INFO - Feature count: 44
+2025-12-30 11:53:12,494 - INFO - Loaded backtest CSV: C:/Users/WALTON/OneDrive/Documents/n/data/GBPUSD_M15_2 month_converted.csv with shape (591, 7)
+2025-12-30 11:53:12,499 - INFO - Validated backtest data: 591 rows
+2025-12-30 11:53:12,530 - INFO - Engineered 45 features for backtesting
+2025-12-30 11:53:12,534 - INFO - Loaded trained scaler for GBPUSD
+2025-12-30 11:53:12,535 - INFO - Running backtest on 392 bars...
+2025-12-30 11:53:12,923 - INFO - Trade 1: BUY PNL: $1.20 Balance: $11.20
+2025-12-30 11:53:13,022 - INFO - Trade 2: BUY PNL: $-2.40 Balance: $8.80
+2025-12-30 11:53:13,332 - INFO - Trade 3: BUY PNL: $23.90 Balance: $32.70
+2025-12-30 11:53:13,632 - INFO - Trade 4: SELL PNL: $17.50 Balance: $50.20
+2025-12-30 11:53:13,728 - INFO - Trade 5: BUY PNL: $34.50 Balance: $84.70
+2025-12-30 11:53:13,832 - INFO - Backtest complete: 5 trades executed
+2025-12-30 11:53:13,834 - INFO - Final balance: $84.70 (Starting: $10.00)
+2025-12-30 14:34:28,710 - INFO - Starting backtest for GBPUSD
+2025-12-30 14:34:37,681 - INFO - Loading DAY_TRADING model for GBPUSD
+2025-12-30 14:34:38,046 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 14:34:38,229 - INFO - Successfully loaded model for GBPUSD
+2025-12-30 14:34:38,233 - INFO - Feature count: 44
+2025-12-30 14:34:38,245 - INFO - Loaded backtest CSV: C:/Users/WALTON/OneDrive/Documents/n/data/GBPUSD_M15_2 month_converted.csv with shape (591, 7)
+2025-12-30 14:34:38,271 - INFO - Validated backtest data: 591 rows
+2025-12-30 14:34:38,323 - INFO - Engineered 45 features for backtesting
+2025-12-30 14:34:38,361 - INFO - Loaded trained scaler for GBPUSD
+2025-12-30 14:34:38,378 - INFO - Running backtest on 392 bars...
+2025-12-30 14:34:39,023 - INFO - Trade 1: BUY PNL: $48.00 Balance: $58.00
+2025-12-30 14:34:39,139 - INFO - Trade 2: BUY PNL: $12.00 Balance: $70.00
+2025-12-30 14:34:39,500 - INFO - Trade 3: BUY PNL: $275.00 Balance: $345.00
+2025-12-30 14:34:39,860 - INFO - Trade 4: SELL PNL: $211.00 Balance: $556.00
+2025-12-30 14:34:39,988 - INFO - Trade 5: BUY PNL: $381.00 Balance: $937.00
+2025-12-30 14:34:40,113 - INFO - Backtest complete: 5 trades executed
+2025-12-30 14:34:40,115 - INFO - Final balance: $937.00 (Starting: $10.00)
+2025-12-30 14:34:48,471 - INFO - Starting backtest for GBPUSD
+2025-12-30 14:34:48,478 - INFO - Loading DAY_TRADING model for GBPUSD
+2025-12-30 14:34:48,625 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 14:34:48,742 - INFO - Successfully loaded model for GBPUSD
+2025-12-30 14:34:48,743 - INFO - Feature count: 44
+2025-12-30 14:34:48,748 - INFO - Loaded backtest CSV: C:/Users/WALTON/OneDrive/Documents/n/data/GBPUSD_M15_2 month_converted.csv with shape (591, 7)
+2025-12-30 14:34:48,759 - INFO - Validated backtest data: 591 rows
+2025-12-30 14:34:48,794 - INFO - Engineered 45 features for backtesting
+2025-12-30 14:34:48,800 - INFO - Loaded trained scaler for GBPUSD
+2025-12-30 14:34:48,802 - INFO - Running backtest on 392 bars...
+2025-12-30 14:34:49,491 - INFO - Trade 1: BUY PNL: $1.20 Balance: $11.20
+2025-12-30 14:34:49,625 - INFO - Trade 2: BUY PNL: $-2.40 Balance: $8.80
+2025-12-30 14:34:49,976 - INFO - Trade 3: BUY PNL: $23.90 Balance: $32.70
+2025-12-30 14:34:50,330 - INFO - Trade 4: SELL PNL: $17.50 Balance: $50.20
+2025-12-30 14:34:50,451 - INFO - Trade 5: BUY PNL: $34.50 Balance: $84.70
+2025-12-30 14:34:50,563 - INFO - Backtest complete: 5 trades executed
+2025-12-30 14:34:50,569 - INFO - Final balance: $84.70 (Starting: $10.00)
+2025-12-30 14:35:01,208 - INFO - Starting backtest for GBPUSD
+2025-12-30 14:35:01,208 - INFO - Loading DAY_TRADING model for GBPUSD
+2025-12-30 14:35:01,345 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 14:35:01,450 - INFO - Successfully loaded model for GBPUSD
+2025-12-30 14:35:01,454 - INFO - Feature count: 44
+2025-12-30 14:35:01,458 - INFO - Loaded backtest CSV: C:/Users/WALTON/OneDrive/Documents/n/data/GBPUSD_M15_2 month_converted.csv with shape (591, 7)
+2025-12-30 14:35:01,464 - INFO - Validated backtest data: 591 rows
+2025-12-30 14:35:01,497 - INFO - Engineered 45 features for backtesting
+2025-12-30 14:35:01,502 - INFO - Loaded trained scaler for GBPUSD
+2025-12-30 14:35:01,509 - INFO - Running backtest on 392 bars...
+2025-12-30 14:35:02,025 - INFO - Trade 1: BUY PNL: $48.00 Balance: $58.00
+2025-12-30 14:35:02,142 - INFO - Trade 2: BUY PNL: $12.00 Balance: $70.00
+2025-12-30 14:35:02,484 - INFO - Trade 3: BUY PNL: $275.00 Balance: $345.00
+2025-12-30 14:35:02,845 - INFO - Trade 4: SELL PNL: $211.00 Balance: $556.00
+2025-12-30 14:35:02,977 - INFO - Trade 5: BUY PNL: $381.00 Balance: $937.00
+2025-12-30 14:35:03,102 - INFO - Backtest complete: 5 trades executed
+2025-12-30 14:35:03,106 - INFO - Final balance: $937.00 (Starting: $10.00)
+2025-12-30 14:35:26,399 - INFO - Starting backtest for GBPUSD
+2025-12-30 14:35:26,399 - INFO - Loading DAY_TRADING model for GBPUSD
+2025-12-30 14:35:26,543 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 14:35:26,647 - INFO - Successfully loaded model for GBPUSD
+2025-12-30 14:35:26,650 - INFO - Feature count: 44
+2025-12-30 14:35:26,653 - INFO - Loaded backtest CSV: C:/Users/WALTON/OneDrive/Documents/n/data/GBPUSD_M15_2 month_converted.csv with shape (591, 7)
+2025-12-30 14:35:26,658 - INFO - Validated backtest data: 591 rows
+2025-12-30 14:35:26,691 - INFO - Engineered 45 features for backtesting
+2025-12-30 14:35:26,695 - INFO - Loaded trained scaler for GBPUSD
+2025-12-30 14:35:26,695 - INFO - Running backtest on 392 bars...
+2025-12-30 14:35:27,250 - INFO - Trade 1: BUY PNL: $1.20 Balance: $11.20
+2025-12-30 14:35:27,375 - INFO - Trade 2: BUY PNL: $-2.40 Balance: $8.80
+2025-12-30 14:35:27,743 - INFO - Trade 3: BUY PNL: $23.90 Balance: $32.70
+2025-12-30 14:35:28,103 - INFO - Trade 4: SELL PNL: $17.50 Balance: $50.20
+2025-12-30 14:35:28,224 - INFO - Trade 5: BUY PNL: $34.50 Balance: $84.70
+2025-12-30 14:35:28,349 - INFO - Backtest complete: 5 trades executed
+2025-12-30 14:35:28,353 - INFO - Final balance: $84.70 (Starting: $10.00)

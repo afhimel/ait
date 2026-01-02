@@ -1,0 +1,476 @@
+2025-12-30 09:11:11,516 - INFO - ================================================================================
+2025-12-30 09:11:11,516 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2025-12-30 09:11:11,516 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2025-12-30 09:11:11,516 - INFO - Timeframe: 15m, Holding Bars: 28
+2025-12-30 09:11:11,518 - INFO - ================================================================================
+2025-12-30 09:11:28,843 - INFO - Starting DAY TRADING training for GBPUSD
+2025-12-30 09:11:28,901 - INFO - Loaded CSV: C:/Users/WALTON/OneDrive/Documents/n/data/GBPUSD_M15_5y_converted.csv with shape (42853, 7)
+2025-12-30 09:11:28,946 - INFO - Validated data: 42853 rows
+2025-12-30 09:11:29,069 - INFO - Day trading features complete: 45 features
+2025-12-30 09:11:29,095 - INFO - Created day trading target with 28 bars horizon
+2025-12-30 09:11:29,097 - INFO - Target distribution: {1: 18318, 2: 12818, 0: 11490}
+2025-12-30 09:11:30,660 - INFO - Prepared day trading sequences: X=(42530, 96, 44), y_class=(42530,), y_reg=(42530,)
+2025-12-30 09:11:30,667 - INFO - Features used: 44
+2025-12-30 09:11:30,679 - INFO - Feature locks saved
+2025-12-30 09:11:30,683 - INFO - Training DAY TRADING model for GBPUSD...
+2025-12-30 09:11:30,683 - INFO - Input shape: (42530, 96, 44), Target shape: (42530,)
+2025-12-30 09:11:37,220 - INFO - LSTM model built with input shape (96, 44)
+2025-12-30 11:22:46,897 - INFO - Training XGBoost classifier...
+2025-12-30 11:24:02,516 - INFO - Training XGBoost regressor...
+2025-12-30 11:24:03,091 - INFO - XGBoost validation accuracy: 0.8453
+2025-12-30 11:24:03,157 - INFO - Day trading validation - Accuracy: 0.8453
+2025-12-30 11:24:03,159 - INFO - Prediction distribution: {np.int64(0): np.int64(2278), np.int64(1): np.int64(3701), np.int64(2): np.int64(2527)}
+2025-12-30 11:24:03,159 - INFO - Day trading model training complete for GBPUSD
+2025-12-30 11:24:03,440 - WARNING - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-12-30 11:24:03,882 - INFO - Day trading model saved to ForexDayTradingAI\models\GBPUSD
+2025-12-30 11:24:03,883 - INFO - Day trading training completed successfully for GBPUSD
+2025-12-30 11:24:11,785 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-30 11:24:11,785 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-30 11:24:14,951 - INFO - Fetched 3895 rows from yfinance
+2025-12-30 11:24:15,039 - INFO - Normalized live data: 3895 rows, 7 columns
+2025-12-30 11:24:15,080 - INFO - Day trading features complete: 45 features
+2025-12-30 11:24:15,080 - INFO - Feature alignment complete: 44 features
+2025-12-30 11:24:15,231 - INFO - Day trading signal generated: BUY with 70.67% confidence
+2025-12-30 11:24:15,231 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-30 11:29:53,201 - INFO - ================================================================================
+2025-12-30 11:29:53,201 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2025-12-30 11:29:53,201 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2025-12-30 11:29:53,201 - INFO - Timeframe: 15m, Holding Bars: 28
+2025-12-30 11:29:53,201 - INFO - ================================================================================
+2025-12-30 11:29:53,413 - INFO - Loaded feature locks for 1 pairs
+2025-12-30 11:29:59,032 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-30 11:29:59,499 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 11:29:59,683 - INFO - Day trading model loaded from ForexDayTradingAI\models\GBPUSD
+2025-12-30 11:29:59,683 - INFO - Model type: DAY_TRADING
+2025-12-30 11:29:59,715 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-30 11:30:01,278 - INFO - Fetched 3893 rows from yfinance
+2025-12-30 11:30:01,289 - INFO - Normalized live data: 3893 rows, 7 columns
+2025-12-30 11:30:01,318 - INFO - Day trading features complete: 45 features
+2025-12-30 11:30:01,320 - INFO - Feature alignment complete: 44 features
+2025-12-30 11:30:01,912 - INFO - Day trading signal generated: BUY with 70.85% confidence
+2025-12-30 11:30:01,914 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-30 11:30:53,753 - INFO - ================================================================================
+2025-12-30 11:30:53,755 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2025-12-30 11:30:53,755 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2025-12-30 11:30:53,755 - INFO - Timeframe: 15m, Holding Bars: 28
+2025-12-30 11:30:53,755 - INFO - ================================================================================
+2025-12-30 11:30:53,963 - INFO - Loaded feature locks for 1 pairs
+2025-12-30 11:30:58,185 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-30 11:30:58,629 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 11:30:58,736 - INFO - Day trading model loaded from ForexDayTradingAI\models\GBPUSD
+2025-12-30 11:30:58,748 - INFO - Model type: DAY_TRADING
+2025-12-30 11:30:58,749 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-30 11:31:00,029 - INFO - Fetched 3894 rows from yfinance
+2025-12-30 11:31:00,034 - INFO - Normalized live data: 3894 rows, 7 columns
+2025-12-30 11:31:00,073 - INFO - Day trading features complete: 45 features
+2025-12-30 11:31:00,073 - INFO - Feature alignment complete: 44 features
+2025-12-30 11:31:00,552 - INFO - Day trading signal generated: BUY with 74.24% confidence
+2025-12-30 11:31:00,552 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-30 11:35:20,975 - INFO - ================================================================================
+2025-12-30 11:35:20,975 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2025-12-30 11:35:20,975 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2025-12-30 11:35:20,975 - INFO - Timeframe: 15m, Holding Bars: 28
+2025-12-30 11:35:20,975 - INFO - ================================================================================
+2025-12-30 11:35:21,166 - INFO - Loaded feature locks for 1 pairs
+2025-12-30 11:35:26,456 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-30 11:35:26,933 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 11:35:27,104 - INFO - Day trading model loaded from ForexDayTradingAI\models\GBPUSD
+2025-12-30 11:35:27,104 - INFO - Model type: DAY_TRADING
+2025-12-30 11:35:27,112 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-30 11:35:28,849 - INFO - Fetched 3894 rows from yfinance
+2025-12-30 11:35:28,858 - INFO - Normalized live data: 3894 rows, 7 columns
+2025-12-30 11:35:28,896 - INFO - Day trading features complete: 45 features
+2025-12-30 11:35:28,903 - INFO - Feature alignment complete: 44 features
+2025-12-30 11:35:29,447 - INFO - Day trading signal generated: BUY with 71.05% confidence
+2025-12-30 11:35:29,448 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-30 11:54:20,719 - INFO - ================================================================================
+2025-12-30 11:54:20,719 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2025-12-30 11:54:20,719 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2025-12-30 11:54:20,719 - INFO - Timeframe: 15m, Holding Bars: 28
+2025-12-30 11:54:20,719 - INFO - ================================================================================
+2025-12-30 11:54:20,822 - INFO - Loaded feature locks for 1 pairs
+2025-12-30 11:54:30,044 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-30 11:54:30,368 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 11:54:30,464 - INFO - Day trading model loaded from ForexDayTradingAI\models\GBPUSD
+2025-12-30 11:54:30,468 - INFO - Model type: DAY_TRADING
+2025-12-30 11:54:30,470 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-30 11:54:32,726 - INFO - Fetched 3895 rows from yfinance
+2025-12-30 11:54:32,731 - INFO - Normalized live data: 3895 rows, 7 columns
+2025-12-30 11:54:32,756 - INFO - Day trading features complete: 45 features
+2025-12-30 11:54:32,756 - INFO - Feature alignment complete: 44 features
+2025-12-30 11:54:33,154 - INFO - Day trading signal generated: BUY with 78.30% confidence
+2025-12-30 11:54:33,155 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-30 13:51:51,383 - INFO - ================================================================================
+2025-12-30 13:51:51,383 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2025-12-30 13:51:51,383 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2025-12-30 13:51:51,383 - INFO - Timeframe: 15m, Holding Bars: 28
+2025-12-30 13:51:51,383 - INFO - ================================================================================
+2025-12-30 13:51:51,549 - INFO - Loaded feature locks for 1 pairs
+2025-12-30 13:52:43,650 - INFO - Starting DAY TRADING training for FOREX
+2025-12-30 13:52:43,698 - INFO - Loaded CSV: C:/Users/WALTON/Downloads/FOREX_CLEAN_15M.csv with shape (46123, 1)
+2025-12-30 13:52:43,698 - ERROR - Error loading CSV C:/Users/WALTON/Downloads/FOREX_CLEAN_15M.csv: Missing required columns: {'high', 'close', 'low', 'datetime', 'volume', 'open', 'spread'}
+2025-12-30 13:52:43,698 - ERROR - Error training FOREX: Missing required columns: {'high', 'close', 'low', 'datetime', 'volume', 'open', 'spread'}
+2025-12-30 13:52:43,708 - ERROR - Traceback (most recent call last):
+  File "C:\Users\WALTON\OneDrive\Documents\gg\ait.py", line 744, in train_model
+    df = processor.load_csv(csv_path)
+  File "C:\Users\WALTON\OneDrive\Documents\gg\ait.py", line 141, in load_csv
+    raise ValueError(f"Missing required columns: {missing_cols}")
+ValueError: Missing required columns: {'high', 'close', 'low', 'datetime', 'volume', 'open', 'spread'}
+
+2025-12-30 13:53:25,937 - INFO - Starting DAY TRADING training for EURUSD
+2025-12-30 13:53:25,991 - INFO - Loaded CSV: C:/Users/WALTON/Downloads/EURUSD_formal.csv with shape (46123, 7)
+2025-12-30 13:53:26,033 - INFO - Validated data: 46123 rows
+2025-12-30 13:53:26,139 - INFO - Day trading features complete: 45 features
+2025-12-30 13:53:26,175 - INFO - Created day trading target with 28 bars horizon
+2025-12-30 13:53:26,186 - INFO - Target distribution: {1: 20504, 2: 13028, 0: 12364}
+2025-12-30 13:53:26,957 - INFO - Prepared day trading sequences: X=(45800, 96, 44), y_class=(45800,), y_reg=(45800,)
+2025-12-30 13:53:26,957 - INFO - Features used: 44
+2025-12-30 13:53:26,963 - INFO - Feature locks saved
+2025-12-30 13:53:26,965 - INFO - Training DAY TRADING model for EURUSD...
+2025-12-30 13:53:26,965 - INFO - Input shape: (45800, 96, 44), Target shape: (45800,)
+2025-12-30 13:53:29,489 - INFO - LSTM model built with input shape (96, 44)
+2025-12-30 15:31:31,633 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-30 15:31:32,210 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 15:31:32,470 - INFO - Day trading model loaded from ForexDayTradingAI\models\GBPUSD
+2025-12-30 15:31:32,492 - INFO - Model type: DAY_TRADING
+2025-12-30 15:31:32,506 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-30 15:31:34,398 - INFO - Fetched 3894 rows from yfinance
+2025-12-30 15:31:34,415 - INFO - Normalized live data: 3894 rows, 7 columns
+2025-12-30 15:31:34,485 - INFO - Day trading features complete: 45 features
+2025-12-30 15:31:34,489 - INFO - Feature alignment complete: 44 features
+2025-12-30 15:31:35,533 - INFO - Day trading signal generated: HOLD with 66.23% confidence
+2025-12-30 15:31:35,547 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-30 15:44:23,481 - INFO - Training XGBoost classifier...
+2025-12-30 15:45:15,978 - INFO - Training XGBoost regressor...
+2025-12-30 15:45:16,102 - INFO - XGBoost validation accuracy: 0.8451
+2025-12-30 15:45:16,122 - INFO - Day trading validation - Accuracy: 0.8451
+2025-12-30 15:45:16,122 - INFO - Prediction distribution: {np.int64(0): np.int64(2445), np.int64(1): np.int64(4108), np.int64(2): np.int64(2607)}
+2025-12-30 15:45:16,124 - INFO - Day trading model training complete for EURUSD
+2025-12-30 15:45:16,259 - WARNING - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-12-30 15:45:16,412 - INFO - Day trading model saved to ForexDayTradingAI\models\EURUSD
+2025-12-30 15:45:16,414 - INFO - Day trading training completed successfully for EURUSD
+2025-12-30 18:40:40,483 - INFO - ================================================================================
+2025-12-30 18:40:40,483 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2025-12-30 18:40:40,483 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2025-12-30 18:40:40,483 - INFO - Timeframe: 15m, Holding Bars: 28
+2025-12-30 18:40:40,483 - INFO - ================================================================================
+2025-12-30 18:40:40,642 - INFO - Loaded feature locks for 2 pairs
+2025-12-30 18:41:58,881 - INFO - Generating DAY TRADING signal for EURUSD
+2025-12-30 18:41:59,377 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 18:41:59,590 - INFO - Day trading model loaded from ForexDayTradingAI\models\EURUSD
+2025-12-30 18:41:59,590 - INFO - Model type: DAY_TRADING
+2025-12-30 18:41:59,604 - INFO - Fetching live day trading data for EURUSD...
+2025-12-30 18:42:00,819 - INFO - Fetched 3894 rows from yfinance
+2025-12-30 18:42:00,833 - INFO - Normalized live data: 3894 rows, 7 columns
+2025-12-30 18:42:00,851 - INFO - Day trading features complete: 45 features
+2025-12-30 18:42:00,851 - INFO - Feature alignment complete: 44 features
+2025-12-30 18:42:01,377 - INFO - Day trading signal generated: SELL with 99.99% confidence
+2025-12-30 18:42:01,377 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-30 19:09:00,773 - INFO - Starting DAY TRADING training for USDCHF
+2025-12-30 19:09:00,820 - INFO - Loaded CSV: C:/Users/WALTON/OneDrive/Documents/n/data/USDCHF_converted.csv with shape (46125, 7)
+2025-12-30 19:09:00,849 - INFO - Validated data: 46125 rows
+2025-12-30 19:09:00,912 - INFO - Day trading features complete: 45 features
+2025-12-30 19:09:00,950 - INFO - Created day trading target with 28 bars horizon
+2025-12-30 19:09:00,952 - INFO - Target distribution: {1: 18942, 0: 13528, 2: 13428}
+2025-12-30 19:09:01,751 - INFO - Prepared day trading sequences: X=(45802, 96, 44), y_class=(45802,), y_reg=(45802,)
+2025-12-30 19:09:01,751 - INFO - Features used: 44
+2025-12-30 19:09:01,762 - INFO - Feature locks saved
+2025-12-30 19:09:01,762 - INFO - Training DAY TRADING model for USDCHF...
+2025-12-30 19:09:01,762 - INFO - Input shape: (45802, 96, 44), Target shape: (45802,)
+2025-12-30 19:09:03,446 - INFO - LSTM model built with input shape (96, 44)
+2025-12-30 20:34:32,977 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-30 20:34:33,423 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-30 20:34:33,728 - INFO - Day trading model loaded from ForexDayTradingAI\models\GBPUSD
+2025-12-30 20:34:33,731 - INFO - Model type: DAY_TRADING
+2025-12-30 20:34:33,777 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-30 20:34:34,688 - INFO - Fetched 3894 rows from yfinance
+2025-12-30 20:34:34,701 - INFO - Normalized live data: 3894 rows, 7 columns
+2025-12-30 20:34:34,759 - INFO - Day trading features complete: 45 features
+2025-12-30 20:34:34,762 - INFO - Feature alignment complete: 44 features
+2025-12-30 20:34:35,654 - INFO - Day trading signal generated: BUY with 99.83% confidence
+2025-12-30 20:34:35,657 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-30 20:54:34,662 - INFO - ================================================================================
+2025-12-30 20:54:34,664 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2025-12-30 20:54:34,664 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2025-12-30 20:54:34,664 - INFO - Timeframe: 15m, Holding Bars: 28
+2025-12-30 20:54:34,666 - INFO - ================================================================================
+2025-12-30 20:54:34,964 - INFO - Loaded feature locks for 3 pairs
+2025-12-30 21:00:01,477 - INFO - Training XGBoost classifier...
+2025-12-30 21:01:01,321 - INFO - Training XGBoost regressor...
+2025-12-30 21:01:01,459 - INFO - XGBoost validation accuracy: 0.8312
+2025-12-30 21:01:01,485 - INFO - Day trading validation - Accuracy: 0.8312
+2025-12-30 21:01:01,485 - INFO - Prediction distribution: {np.int64(0): np.int64(2622), np.int64(1): np.int64(3858), np.int64(2): np.int64(2681)}
+2025-12-30 21:01:01,485 - INFO - Day trading model training complete for USDCHF
+2025-12-30 21:01:01,581 - WARNING - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-12-30 21:01:01,811 - INFO - Day trading model saved to ForexDayTradingAI\models\USDCHF
+2025-12-30 21:01:01,811 - INFO - Day trading training completed successfully for USDCHF
+2025-12-30 21:01:11,762 - INFO - Generating DAY TRADING signal for USDCHF
+2025-12-30 21:01:11,763 - INFO - Fetching live day trading data for USDCHF...
+2025-12-30 21:01:12,388 - INFO - Fetched 3885 rows from yfinance
+2025-12-30 21:01:12,392 - INFO - Normalized live data: 3885 rows, 7 columns
+2025-12-30 21:01:12,429 - INFO - Day trading features complete: 45 features
+2025-12-30 21:01:12,432 - INFO - Feature alignment complete: 44 features
+2025-12-30 21:01:12,530 - INFO - Day trading signal generated: HOLD with 89.30% confidence
+2025-12-30 21:01:12,531 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 08:55:33,088 - INFO - ================================================================================
+2025-12-31 08:55:33,090 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2025-12-31 08:55:33,090 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2025-12-31 08:55:33,090 - INFO - Timeframe: 15m, Holding Bars: 28
+2025-12-31 08:55:33,090 - INFO - ================================================================================
+2025-12-31 08:55:33,260 - INFO - Loaded feature locks for 3 pairs
+2025-12-31 08:55:46,576 - INFO - Generating DAY TRADING signal for EURUSD
+2025-12-31 08:55:47,086 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-31 08:55:47,291 - INFO - Day trading model loaded from ForexDayTradingAI\models\EURUSD
+2025-12-31 08:55:47,291 - INFO - Model type: DAY_TRADING
+2025-12-31 08:55:47,305 - INFO - Fetching live day trading data for EURUSD...
+2025-12-31 08:55:48,624 - INFO - Fetched 3937 rows from yfinance
+2025-12-31 08:55:48,633 - INFO - Normalized live data: 3937 rows, 7 columns
+2025-12-31 08:55:48,677 - INFO - Day trading features complete: 45 features
+2025-12-31 08:55:48,680 - INFO - Feature alignment complete: 44 features
+2025-12-31 08:55:49,222 - INFO - Day trading signal generated: HOLD with 61.80% confidence
+2025-12-31 08:55:49,222 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 08:55:56,095 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-31 08:55:56,250 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-31 08:55:56,395 - INFO - Day trading model loaded from ForexDayTradingAI\models\GBPUSD
+2025-12-31 08:55:56,395 - INFO - Model type: DAY_TRADING
+2025-12-31 08:55:56,424 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-31 08:55:57,169 - INFO - Fetched 3937 rows from yfinance
+2025-12-31 08:55:57,174 - INFO - Normalized live data: 3937 rows, 7 columns
+2025-12-31 08:55:57,193 - INFO - Day trading features complete: 45 features
+2025-12-31 08:55:57,193 - INFO - Feature alignment complete: 44 features
+2025-12-31 08:55:57,517 - INFO - Day trading signal generated: BUY with 60.52% confidence
+2025-12-31 08:55:57,517 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 08:56:05,023 - INFO - Generating DAY TRADING signal for USDCHF
+2025-12-31 08:56:05,172 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2025-12-31 08:56:05,322 - INFO - Day trading model loaded from ForexDayTradingAI\models\USDCHF
+2025-12-31 08:56:05,323 - INFO - Model type: DAY_TRADING
+2025-12-31 08:56:05,335 - INFO - Fetching live day trading data for USDCHF...
+2025-12-31 08:56:05,722 - INFO - Fetched 3930 rows from yfinance
+2025-12-31 08:56:05,727 - INFO - Normalized live data: 3930 rows, 7 columns
+2025-12-31 08:56:05,753 - INFO - Day trading features complete: 45 features
+2025-12-31 08:56:05,757 - INFO - Feature alignment complete: 44 features
+2025-12-31 08:56:06,157 - INFO - Day trading signal generated: HOLD with 97.81% confidence
+2025-12-31 08:56:06,157 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 08:56:24,541 - INFO - Starting DAY TRADING training for USDJPY
+2025-12-31 08:56:24,614 - INFO - Loaded CSV: C:/Users/WALTON/OneDrive/Documents/n/data/USDJPY.csv with shape (46126, 7)
+2025-12-31 08:56:24,644 - INFO - Validated data: 46126 rows
+2025-12-31 08:56:24,750 - INFO - Day trading features complete: 45 features
+2025-12-31 08:56:24,796 - INFO - Created day trading target with 28 bars horizon
+2025-12-31 08:56:24,802 - INFO - Target distribution: {2: 16148, 1: 15185, 0: 14566}
+2025-12-31 08:56:25,774 - INFO - Prepared day trading sequences: X=(45803, 96, 44), y_class=(45803,), y_reg=(45803,)
+2025-12-31 08:56:25,774 - INFO - Features used: 44
+2025-12-31 08:56:25,783 - INFO - Feature locks saved
+2025-12-31 08:56:25,785 - INFO - Training DAY TRADING model for USDJPY...
+2025-12-31 08:56:25,786 - INFO - Input shape: (45803, 96, 44), Target shape: (45803,)
+2025-12-31 08:56:31,329 - INFO - LSTM model built with input shape (96, 44)
+2025-12-31 10:37:08,937 - INFO - Training XGBoost classifier...
+2025-12-31 10:39:10,157 - INFO - Training XGBoost regressor...
+2025-12-31 10:39:11,401 - INFO - XGBoost validation accuracy: 0.8359
+2025-12-31 10:39:11,542 - INFO - Day trading validation - Accuracy: 0.8359
+2025-12-31 10:39:11,544 - INFO - Prediction distribution: {np.int64(0): np.int64(2823), np.int64(1): np.int64(3100), np.int64(2): np.int64(3238)}
+2025-12-31 10:39:11,544 - INFO - Day trading model training complete for USDJPY
+2025-12-31 10:39:11,881 - WARNING - You are saving your model as an HDF5 file via `model.save()` or `keras.saving.save_model(model)`. This file format is considered legacy. We recommend using instead the native Keras format, e.g. `model.save('my_model.keras')` or `keras.saving.save_model(model, 'my_model.keras')`. 
+2025-12-31 10:39:13,006 - INFO - Day trading model saved to ForexDayTradingAI\models\USDJPY
+2025-12-31 10:39:13,008 - INFO - Day trading training completed successfully for USDJPY
+2025-12-31 10:41:34,372 - INFO - Generating DAY TRADING signal for USDJPY
+2025-12-31 10:41:34,372 - INFO - Fetching live day trading data for USDJPY...
+2025-12-31 10:41:35,046 - INFO - Fetched 3944 rows from yfinance
+2025-12-31 10:41:35,056 - INFO - Normalized live data: 3944 rows, 7 columns
+2025-12-31 10:41:35,087 - INFO - Day trading features complete: 45 features
+2025-12-31 10:41:35,087 - INFO - Feature alignment complete: 44 features
+2025-12-31 10:41:35,170 - INFO - Day trading signal generated: HOLD with 84.42% confidence
+2025-12-31 10:41:35,170 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 10:41:44,192 - INFO - Generating DAY TRADING signal for EURUSD
+2025-12-31 10:41:44,192 - INFO - Fetching live day trading data for EURUSD...
+2025-12-31 10:41:44,594 - INFO - Fetched 3946 rows from yfinance
+2025-12-31 10:41:44,594 - INFO - Normalized live data: 3946 rows, 7 columns
+2025-12-31 10:41:44,622 - INFO - Day trading features complete: 45 features
+2025-12-31 10:41:44,624 - INFO - Feature alignment complete: 44 features
+2025-12-31 10:41:44,717 - INFO - Day trading signal generated: SELL with 97.57% confidence
+2025-12-31 10:41:44,717 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 10:41:55,778 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-31 10:41:55,786 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-31 10:41:56,303 - INFO - Fetched 3946 rows from yfinance
+2025-12-31 10:41:56,307 - INFO - Normalized live data: 3946 rows, 7 columns
+2025-12-31 10:41:56,840 - INFO - Day trading features complete: 45 features
+2025-12-31 10:41:56,840 - INFO - Feature alignment complete: 44 features
+2025-12-31 10:41:56,917 - INFO - Day trading signal generated: BUY with 96.88% confidence
+2025-12-31 10:41:56,933 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 10:42:04,520 - INFO - Generating DAY TRADING signal for USDCHF
+2025-12-31 10:42:04,520 - INFO - Fetching live day trading data for USDCHF...
+2025-12-31 10:42:05,094 - INFO - Fetched 3939 rows from yfinance
+2025-12-31 10:42:05,094 - INFO - Normalized live data: 3939 rows, 7 columns
+2025-12-31 10:42:05,110 - INFO - Day trading features complete: 45 features
+2025-12-31 10:42:05,110 - INFO - Feature alignment complete: 44 features
+2025-12-31 10:42:05,206 - INFO - Day trading signal generated: BUY with 92.01% confidence
+2025-12-31 10:42:05,210 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 10:42:12,546 - INFO - Generating DAY TRADING signal for USDJPY
+2025-12-31 10:42:12,546 - INFO - Fetching live day trading data for USDJPY...
+2025-12-31 10:42:12,958 - INFO - Fetched 3944 rows from yfinance
+2025-12-31 10:42:12,968 - INFO - Normalized live data: 3944 rows, 7 columns
+2025-12-31 10:42:12,992 - INFO - Day trading features complete: 45 features
+2025-12-31 10:42:12,994 - INFO - Feature alignment complete: 44 features
+2025-12-31 10:42:13,086 - INFO - Day trading signal generated: HOLD with 88.29% confidence
+2025-12-31 10:42:13,086 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 10:43:10,731 - INFO - Generating DAY TRADING signal for GBPUSD
+2025-12-31 10:43:10,731 - INFO - Fetching live day trading data for GBPUSD...
+2025-12-31 10:43:11,216 - INFO - Fetched 3946 rows from yfinance
+2025-12-31 10:43:11,227 - INFO - Normalized live data: 3946 rows, 7 columns
+2025-12-31 10:43:11,250 - INFO - Day trading features complete: 45 features
+2025-12-31 10:43:11,254 - INFO - Feature alignment complete: 44 features
+2025-12-31 10:43:11,344 - INFO - Day trading signal generated: BUY with 98.68% confidence
+2025-12-31 10:43:11,344 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 10:44:27,191 - INFO - Generating DAY TRADING signal for EURUSD
+2025-12-31 10:44:27,191 - INFO - Fetching live day trading data for EURUSD...
+2025-12-31 10:44:27,623 - INFO - Fetched 3946 rows from yfinance
+2025-12-31 10:44:27,627 - INFO - Normalized live data: 3946 rows, 7 columns
+2025-12-31 10:44:27,637 - INFO - Day trading features complete: 45 features
+2025-12-31 10:44:27,637 - INFO - Feature alignment complete: 44 features
+2025-12-31 10:44:27,717 - INFO - Day trading signal generated: SELL with 96.52% confidence
+2025-12-31 10:44:27,717 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 10:48:45,802 - INFO - Generating DAY TRADING signal for USDCHF
+2025-12-31 10:48:45,802 - INFO - Fetching live day trading data for USDCHF...
+2025-12-31 10:48:46,278 - INFO - Fetched 3940 rows from yfinance
+2025-12-31 10:48:46,278 - INFO - Normalized live data: 3940 rows, 7 columns
+2025-12-31 10:48:46,309 - INFO - Day trading features complete: 45 features
+2025-12-31 10:48:46,309 - INFO - Feature alignment complete: 44 features
+2025-12-31 10:48:46,405 - INFO - Day trading signal generated: BUY with 92.01% confidence
+2025-12-31 10:48:46,405 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 11:10:42,056 - INFO - Generating DAY TRADING signal for USDJPY
+2025-12-31 11:10:42,057 - INFO - Fetching live day trading data for USDJPY...
+2025-12-31 11:10:42,631 - INFO - Fetched 3946 rows from yfinance
+2025-12-31 11:10:42,633 - INFO - Normalized live data: 3946 rows, 7 columns
+2025-12-31 11:10:42,678 - INFO - Day trading features complete: 45 features
+2025-12-31 11:10:42,678 - INFO - Feature alignment complete: 44 features
+2025-12-31 11:10:42,870 - INFO - Day trading signal generated: HOLD with 82.34% confidence
+2025-12-31 11:10:42,870 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2025-12-31 11:10:45,238 - INFO - Generating DAY TRADING signal for USDJPY
+2025-12-31 11:10:45,238 - INFO - Fetching live day trading data for USDJPY...
+2025-12-31 11:10:45,638 - INFO - Fetched 3946 rows from yfinance
+2025-12-31 11:10:45,638 - INFO - Normalized live data: 3946 rows, 7 columns
+2025-12-31 11:10:45,662 - INFO - Day trading features complete: 45 features
+2025-12-31 11:10:45,662 - INFO - Feature alignment complete: 44 features
+2025-12-31 11:10:45,799 - INFO - Day trading signal generated: HOLD with 82.34% confidence
+2025-12-31 11:10:45,799 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-01 13:31:51,961 - INFO - ================================================================================
+2026-01-01 13:31:51,961 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2026-01-01 13:31:51,963 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2026-01-01 13:31:51,964 - INFO - Timeframe: 15m, Holding Bars: 28
+2026-01-01 13:31:51,964 - INFO - ================================================================================
+2026-01-01 13:31:52,140 - INFO - Loaded feature locks for 4 pairs
+2026-01-01 13:32:00,784 - INFO - Generating DAY TRADING signal for EURUSD
+2026-01-01 13:32:01,244 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2026-01-01 13:32:01,436 - INFO - Day trading model loaded from ForexDayTradingAI\models\EURUSD
+2026-01-01 13:32:01,440 - INFO - Model type: DAY_TRADING
+2026-01-01 13:32:01,456 - INFO - Fetching live day trading data for EURUSD...
+2026-01-01 13:32:02,644 - INFO - Fetched 4026 rows from yfinance
+2026-01-01 13:32:02,651 - INFO - Normalized live data: 4026 rows, 7 columns
+2026-01-01 13:32:02,688 - INFO - Day trading features complete: 45 features
+2026-01-01 13:32:02,688 - INFO - Feature alignment complete: 44 features
+2026-01-01 13:32:03,213 - INFO - Day trading signal generated: SELL with 94.99% confidence
+2026-01-01 13:32:03,213 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-02 07:23:12,704 - INFO - ================================================================================
+2026-01-02 07:23:12,704 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2026-01-02 07:23:12,704 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2026-01-02 07:23:12,704 - INFO - Timeframe: 15m, Holding Bars: 28
+2026-01-02 07:23:12,704 - INFO - ================================================================================
+2026-01-02 07:23:12,835 - INFO - Loaded feature locks for 4 pairs
+2026-01-02 07:24:27,056 - INFO - Generating DAY TRADING signal for EURUSD
+2026-01-02 07:24:27,537 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2026-01-02 07:24:27,729 - INFO - Day trading model loaded from ForexDayTradingAI\models\EURUSD
+2026-01-02 07:24:27,729 - INFO - Model type: DAY_TRADING
+2026-01-02 07:24:27,743 - INFO - Fetching live day trading data for EURUSD...
+2026-01-02 07:24:28,998 - INFO - Fetched 4005 rows from yfinance
+2026-01-02 07:24:29,026 - INFO - Normalized live data: 4005 rows, 7 columns
+2026-01-02 07:24:29,045 - INFO - Day trading features complete: 45 features
+2026-01-02 07:24:29,045 - INFO - Feature alignment complete: 44 features
+2026-01-02 07:24:29,553 - INFO - Day trading signal generated: SELL with 99.99% confidence
+2026-01-02 07:24:29,553 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-02 07:26:17,426 - INFO - Generating DAY TRADING signal for GBPUSD
+2026-01-02 07:26:17,544 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2026-01-02 07:26:17,657 - INFO - Day trading model loaded from ForexDayTradingAI\models\GBPUSD
+2026-01-02 07:26:17,657 - INFO - Model type: DAY_TRADING
+2026-01-02 07:26:17,685 - INFO - Fetching live day trading data for GBPUSD...
+2026-01-02 07:26:18,236 - INFO - Fetched 4009 rows from yfinance
+2026-01-02 07:26:18,240 - INFO - Normalized live data: 4009 rows, 7 columns
+2026-01-02 07:26:18,263 - INFO - Day trading features complete: 45 features
+2026-01-02 07:26:18,263 - INFO - Feature alignment complete: 44 features
+2026-01-02 07:26:18,588 - INFO - Day trading signal generated: HOLD with 80.51% confidence
+2026-01-02 07:26:18,588 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-02 07:26:23,828 - INFO - Generating DAY TRADING signal for USDCHF
+2026-01-02 07:26:23,980 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2026-01-02 07:26:24,130 - INFO - Day trading model loaded from ForexDayTradingAI\models\USDCHF
+2026-01-02 07:26:24,131 - INFO - Model type: DAY_TRADING
+2026-01-02 07:26:24,143 - INFO - Fetching live day trading data for USDCHF...
+2026-01-02 07:26:24,619 - INFO - Fetched 4001 rows from yfinance
+2026-01-02 07:26:24,623 - INFO - Normalized live data: 4001 rows, 7 columns
+2026-01-02 07:26:24,657 - INFO - Day trading features complete: 45 features
+2026-01-02 07:26:24,662 - INFO - Feature alignment complete: 44 features
+2026-01-02 07:26:25,066 - INFO - Day trading signal generated: HOLD with 52.47% confidence
+2026-01-02 07:26:25,068 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-02 07:26:32,292 - INFO - Generating DAY TRADING signal for USDJPY
+2026-01-02 07:26:32,408 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2026-01-02 07:26:32,547 - INFO - Day trading model loaded from ForexDayTradingAI\models\USDJPY
+2026-01-02 07:26:32,547 - INFO - Model type: DAY_TRADING
+2026-01-02 07:26:32,561 - INFO - Fetching live day trading data for USDJPY...
+2026-01-02 07:26:32,978 - INFO - Fetched 3994 rows from yfinance
+2026-01-02 07:26:32,984 - INFO - Normalized live data: 3994 rows, 7 columns
+2026-01-02 07:26:33,012 - INFO - Day trading features complete: 45 features
+2026-01-02 07:26:33,014 - INFO - Feature alignment complete: 44 features
+2026-01-02 07:26:33,327 - INFO - Day trading signal generated: HOLD with 80.83% confidence
+2026-01-02 07:26:33,343 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-02 07:26:39,011 - INFO - Generating DAY TRADING signal for USDCHF
+2026-01-02 07:26:39,011 - INFO - Fetching live day trading data for USDCHF...
+2026-01-02 07:26:39,512 - INFO - Fetched 4001 rows from yfinance
+2026-01-02 07:26:39,516 - INFO - Normalized live data: 4001 rows, 7 columns
+2026-01-02 07:26:39,542 - INFO - Day trading features complete: 45 features
+2026-01-02 07:26:39,546 - INFO - Feature alignment complete: 44 features
+2026-01-02 07:26:39,627 - INFO - Day trading signal generated: HOLD with 52.47% confidence
+2026-01-02 07:26:39,627 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-02 07:29:16,301 - INFO - Generating DAY TRADING signal for EURUSD
+2026-01-02 07:29:16,301 - INFO - Fetching live day trading data for EURUSD...
+2026-01-02 07:29:16,751 - INFO - Fetched 4005 rows from yfinance
+2026-01-02 07:29:16,767 - INFO - Normalized live data: 4005 rows, 7 columns
+2026-01-02 07:29:16,790 - INFO - Day trading features complete: 45 features
+2026-01-02 07:29:16,794 - INFO - Feature alignment complete: 44 features
+2026-01-02 07:29:16,871 - INFO - Day trading signal generated: SELL with 99.99% confidence
+2026-01-02 07:29:16,871 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-02 11:29:58,553 - INFO - ================================================================================
+2026-01-02 11:29:58,553 - INFO - FOREX DAY TRADING AI SYSTEM STARTING...
+2026-01-02 11:29:58,553 - INFO - Strategy: 6-7 Hour Holds, 1:2 Risk-Reward
+2026-01-02 11:29:58,553 - INFO - Timeframe: 15m, Holding Bars: 28
+2026-01-02 11:29:58,553 - INFO - ================================================================================
+2026-01-02 11:29:58,741 - INFO - Loaded feature locks for 4 pairs
+2026-01-02 11:30:34,515 - INFO - Generating DAY TRADING signal for GBPUSD
+2026-01-02 11:30:34,901 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2026-01-02 11:30:35,035 - INFO - Day trading model loaded from ForexDayTradingAI\models\GBPUSD
+2026-01-02 11:30:35,036 - INFO - Model type: DAY_TRADING
+2026-01-02 11:30:35,065 - INFO - Fetching live day trading data for GBPUSD...
+2026-01-02 11:30:38,222 - INFO - Fetched 4016 rows from yfinance
+2026-01-02 11:30:38,226 - INFO - Normalized live data: 4016 rows, 7 columns
+2026-01-02 11:30:38,258 - INFO - Day trading features complete: 45 features
+2026-01-02 11:30:38,260 - INFO - Feature alignment complete: 44 features
+2026-01-02 11:30:38,830 - INFO - Day trading signal generated: BUY with 87.79% confidence
+2026-01-02 11:30:38,830 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-02 11:32:42,037 - INFO - Generating DAY TRADING signal for USDCHF
+2026-01-02 11:32:42,202 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2026-01-02 11:32:42,322 - INFO - Day trading model loaded from ForexDayTradingAI\models\USDCHF
+2026-01-02 11:32:42,322 - INFO - Model type: DAY_TRADING
+2026-01-02 11:32:42,335 - INFO - Fetching live day trading data for USDCHF...
+2026-01-02 11:32:43,715 - INFO - Fetched 4012 rows from yfinance
+2026-01-02 11:32:43,715 - INFO - Normalized live data: 4012 rows, 7 columns
+2026-01-02 11:32:43,750 - INFO - Day trading features complete: 45 features
+2026-01-02 11:32:43,750 - INFO - Feature alignment complete: 44 features
+2026-01-02 11:32:44,093 - INFO - Day trading signal generated: HOLD with 54.04% confidence
+2026-01-02 11:32:44,093 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
+2026-01-02 11:32:53,093 - INFO - Generating DAY TRADING signal for USDJPY
+2026-01-02 11:32:53,216 - WARNING - Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2026-01-02 11:32:53,365 - INFO - Day trading model loaded from ForexDayTradingAI\models\USDJPY
+2026-01-02 11:32:53,365 - INFO - Model type: DAY_TRADING
+2026-01-02 11:32:53,377 - INFO - Fetching live day trading data for USDJPY...
+2026-01-02 11:32:53,771 - INFO - Fetched 4003 rows from yfinance
+2026-01-02 11:32:53,771 - INFO - Normalized live data: 4003 rows, 7 columns
+2026-01-02 11:32:53,801 - INFO - Day trading features complete: 45 features
+2026-01-02 11:32:53,803 - INFO - Feature alignment complete: 44 features
+2026-01-02 11:32:54,116 - INFO - Day trading signal generated: HOLD with 68.08% confidence
+2026-01-02 11:32:54,116 - INFO - Risk-Reward: 1:2, Holding: 6-7 hours
