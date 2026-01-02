@@ -16,6 +16,7 @@ import pickle
 import logging
 import threading
 import traceback
+from sklearn.base import BaseEstimator, RegressorMixin # Add this line
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional, Any
@@ -1303,4 +1304,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
