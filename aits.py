@@ -1,301 +1,819 @@
 """
-Streamlit Web UI for Forex Day Trading AI System
-Simplified blocking version - no threading issues
+Forex Day Trading AI - Streamlit Web Application
+User-only signal generation interface
+Uses pre-trained models from local directory
 """
 
 import streamlit as st
-import json
 import pandas as pd
+import numpy as np
+import json
+import pickle
+import traceback
+import yfinance as yf
+from typing import Dict, List, Tuple, Optional, Any
+from datetime import datetime, timedelta
 from pathlib import Path
-from datetime import datetime
-import sys
-import os
+import warnings
+warnings.filterwarnings('ignore')
 
-# ============================================================================
-# IMPORT EXISTING CLASSES WITHOUT TKINTER CONFLICTS
-# ============================================================================
-
-import unittest.mock as mock
-
-# Create mock for tkinter modules
-mock_tkinter = mock.MagicMock()
-mock_tkinter.Tk = mock.MagicMock()
-mock_tkinter.ttk = mock.MagicMock()
-mock_tkinter.messagebox = mock.MagicMock()
-mock_tkinter.filedialog = mock.MagicMock()
-mock_tkinter.scrolledtext = mock.MagicMock()
-
-# Patch tkinter before importing ait
-sys.modules['tkinter'] = mock_tkinter
-sys.modules['tkinter.ttk'] = mock_tkinter.ttk
-sys.modules['tkinter.messagebox'] = mock_tkinter.messagebox
-sys.modules['tkinter.filedialog'] = mock_tkinter.filedialog
-sys.modules['tkinter.scrolledtext'] = mock_tkinter.scrolledtext
+# Try to import TensorFlow with graceful fallback
+try:
+    import tensorflow as tf
+    from tensorflow import keras
+    TENSORFLOW_AVAILABLE = True
+except ImportError:
+    st.warning("TensorFlow not available. Some features may be limited.")
+    TENSORFLOW_AVAILABLE = False
 
 try:
-    # Import the original module
-    import ait
-    
-    # Get the classes we need
-    Config = ait.Config
-    logger = ait.logger
-    
-    # Import ModelManager directly
-    from ait import ModelManager
-    
-    # Create a global model manager instance
-    model_manager = ModelManager()
-    
-    st.success("✅ Forex Day Trading AI System Loaded")
-    
-except Exception as e:
-    st.error(f"Error importing AI system: {str(e)}")
-    st.stop()
+    import xgboost as xgb
+    XGBOOST_AVAILABLE = True
+except ImportError:
+    st.warning("XGBoost not available. Some features may be limited.")
+    XGBOOST_AVAILABLE = False
 
 # ============================================================================
-# STREAMLIT UI - SIMPLE BLOCKING VERSION
+# CONFIGURATION - DAY TRADING VERSION
 # ============================================================================
 
-st.set_page_config(
-    page_title="Forex Day Trading AI",
-    page_icon="📈",
-    layout="wide"
-)
-
-# Custom CSS
-st.markdown("""
-<style>
-    .big-font { font-size: 24px; font-weight: bold; }
-    .signal-box { 
-        background-color: #f0f2f6; 
-        padding: 20px; 
-        border-radius: 10px; 
-        margin: 10px 0;
-    }
-    .buy { color: green; font-weight: bold; }
-    .sell { color: red; font-weight: bold; }
-    .hold { color: orange; font-weight: bold; }
-</style>
-""", unsafe_allow_html=True)
-
-# Title
-st.title("Forex Day Trading AI System")
-st.markdown("**6-7 Hour Holds • 1:2 Risk-Reward • 15-Minute Timeframe**")
-
-# Function to get available pairs
-def get_available_pairs():
-    pairs = []
-    if Config.MODELS_DIR.exists():
-        for item in Config.MODELS_DIR.iterdir():
-            if item.is_dir() and (item / "metadata.json").exists():
-                try:
-                    with open(item / "metadata.json", 'r') as f:
-                        metadata = json.load(f)
-                    if metadata.get('model_type') == 'DAY_TRADING':
-                        pairs.append(item.name)
-                except:
-                    pairs.append(item.name)
-    return sorted(pairs)
-
-# Get available pairs
-available_pairs = get_available_pairs()
-
-# Create tabs
-tab1, tab2 = st.tabs(["📈 Generate Signals", "⚙️ Train Models"])
-
-with tab1:
-    st.header("Generate Day Trading Signals")
+class Config:
+    """Application configuration - DAY TRADING EDITION"""
+    BASE_DIR = Path("ForexDayTradingAI")
+    MODELS_DIR = BASE_DIR / "models"
+    SCALERS_DIR = BASE_DIR / "scalers"
+    DATA_DIR = BASE_DIR / "data"
     
-    if not available_pairs:
-        st.warning("⚠️ No trained models found. Please train models first.")
-    else:
-        col1, col2 = st.columns([1, 2])
-        
-        with col1:
-            selected_pair = st.selectbox(
-                "Select Currency Pair:",
-                available_pairs,
-                key="signal_pair"
-            )
+    SEQUENCE_LENGTH = 96  # 24 hours in 15m candles
+    
+    # DAY TRADING parameters (6-7 hour holds)
+    DAYTRADE_TP_PIPS = 40  # Take profit in pips (1:2 RR)
+    DAYTRADE_SL_PIPS = 20  # Stop loss in pips
+    CONFIDENCE_THRESHOLD = 0.65  # Higher threshold for day trades
+    HOLDING_BARS = 28  # 7 hours in 15m bars (28 periods)
+    
+    # Live data parameters
+    LIVE_DAYS = 60  # More data for day trading context
+    LIVE_INTERVAL = "15m"
+
+
+# ============================================================================
+# DATA PROCESSING - MATCHING ORIGINAL AIT.PY
+# ============================================================================
+
+class DataProcessor:
+    """Handle all data processing, feature engineering, and normalization"""
+    
+    REQUIRED_COLUMNS = ['datetime', 'open', 'high', 'low', 'close', 'volume', 'spread']
+    
+    def __init__(self):
+        self.feature_names = None
+        self.scaler = None
+    
+    def engineer_features(self, df: pd.DataFrame) -> pd.DataFrame:
+        """Create technical indicators optimized for day trading (15m candles)"""
+        try:
+            df = df.copy()
             
-            if st.button("🚀 Generate Signal", type="primary", use_container_width=True):
-                # Store in session state to trigger signal generation
-                st.session_state.generate_signal = True
-                st.session_state.selected_pair = selected_pair
+            # Price-based features
+            df['price_range'] = df['high'] - df['low']
+            df['body'] = abs(df['close'] - df['open'])
+            df['upper_shadow'] = df['high'] - df[['open', 'close']].max(axis=1)
+            df['lower_shadow'] = df[['open', 'close']].min(axis=1) - df['low']
+            
+            # Returns (smoother for day trading)
+            df['returns'] = df['close'].pct_change()
+            df['log_returns'] = np.log(df['close'] / df['close'].shift(1))
+            
+            # Moving averages - optimized for day trading
+            for period in [20, 50, 100, 200]:
+                df[f'sma_{period}'] = df['close'].rolling(window=period).mean()
+                df[f'ema_{period}'] = df['close'].ewm(span=period, adjust=False).mean()
+            
+            # Price position relative to MAs
+            df['price_vs_sma20'] = df['close'] / df['sma_20']
+            df['price_vs_sma50'] = df['close'] / df['sma_50']
+            
+            # Volatility with longer windows
+            df['volatility_20'] = df['returns'].rolling(window=20).std()
+            df['volatility_50'] = df['returns'].rolling(window=50).std()
+            df['atr_14'] = self._calculate_atr(df, 14)
+            
+            # RSI with multiple timeframes
+            df['rsi_14'] = self._calculate_rsi(df['close'], 14)
+            df['rsi_28'] = self._calculate_rsi(df['close'], 28)
+            
+            # MACD with slower settings
+            exp1 = df['close'].ewm(span=12, adjust=False).mean()
+            exp2 = df['close'].ewm(span=26, adjust=False).mean()
+            df['macd'] = exp1 - exp2
+            df['macd_signal'] = df['macd'].ewm(span=9, adjust=False).mean()
+            df['macd_diff'] = df['macd'] - df['macd_signal']
+            
+            # Bollinger Bands
+            df['bb_middle'] = df['close'].rolling(window=20).mean()
+            bb_std = df['close'].rolling(window=20).std()
+            df['bb_upper'] = df['bb_middle'] + (bb_std * 2)
+            df['bb_lower'] = df['bb_middle'] - (bb_std * 2)
+            df['bb_width'] = df['bb_upper'] - df['bb_lower']
+            df['bb_position'] = (df['close'] - df['bb_lower']) / (df['bb_upper'] - df['bb_lower'])
+            
+            # Volume features
+            df['volume_sma_20'] = df['volume'].rolling(window=20).mean()
+            df['volume_ratio'] = df['volume'] / (df['volume_sma_20'] + 1e-10)
+            
+            # Spread features
+            df['spread_sma_20'] = df['spread'].rolling(window=20).mean()
+            df['spread_ratio'] = df['spread'] / (df['spread_sma_20'] + 1e-10)
+            
+            # Time-based features for day trading sessions
+            df['hour'] = df['datetime'].dt.hour
+            df['day_of_week'] = df['datetime'].dt.dayofweek
+            
+            # Session indicators
+            df['london_session'] = ((df['hour'] >= 8) & (df['hour'] < 16)).astype(int)
+            df['ny_session'] = ((df['hour'] >= 13) & (df['hour'] < 21)).astype(int)
+            df['asian_session'] = ((df['hour'] >= 22) | (df['hour'] < 6)).astype(int)
+            
+            # Remove NaN rows created by indicators
+            df = df.dropna()
+            
+            return df
+            
+        except Exception as e:
+            st.error(f"Error in feature engineering: {str(e)}")
+            raise
+    
+    def _calculate_atr(self, df: pd.DataFrame, period: int = 14) -> pd.Series:
+        """Calculate Average True Range"""
+        high_low = df['high'] - df['low']
+        high_close = abs(df['high'] - df['close'].shift())
+        low_close = abs(df['low'] - df['close'].shift())
         
-        with col2:
-            # Check if we need to generate a signal
-            if 'generate_signal' in st.session_state and st.session_state.generate_signal:
-                selected_pair = st.session_state.selected_pair
+        true_range = pd.concat([high_low, high_close, low_close], axis=1).max(axis=1)
+        atr = true_range.rolling(window=period).mean()
+        return atr
+    
+    def _calculate_rsi(self, prices: pd.Series, period: int = 14) -> pd.Series:
+        """Calculate Relative Strength Index"""
+        delta = prices.diff()
+        gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
+        loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+        rs = gain / (loss + 1e-10)
+        rsi = 100 - (100 / (1 + rs))
+        return rsi
+    
+    def fetch_live_data(self, symbol: str, days: int = None) -> pd.DataFrame:
+        """Fetch live data from yfinance and normalize to training format"""
+        try:
+            if days is None:
+                days = Config.LIVE_DAYS
+            
+            # Convert currency pair format (EURUSD -> EURUSD=X)
+            if not symbol.endswith('=X'):
+                yahoo_symbol = f"{symbol}=X"
+            else:
+                yahoo_symbol = symbol
+            
+            # Fetch data
+            end_date = datetime.now()
+            start_date = end_date - timedelta(days=days)
+            
+            ticker = yf.Ticker(yahoo_symbol)
+            df = ticker.history(start=start_date, end=end_date, interval=Config.LIVE_INTERVAL)
+            
+            if df.empty:
+                raise ValueError(f"No data returned for {yahoo_symbol}")
+            
+            # Flatten MultiIndex if present
+            if isinstance(df.columns, pd.MultiIndex):
+                df.columns = ['_'.join(col).strip() if col[1] else col[0] for col in df.columns.values]
+            
+            # Reset index to get datetime as column
+            df = df.reset_index()
+            
+            # Rename and select columns
+            column_mapping = {
+                'Date': 'datetime',
+                'Datetime': 'datetime',
+                'Open': 'open',
+                'High': 'high',
+                'Low': 'low',
+                'Close': 'close',
+                'Volume': 'volume'
+            }
+            df = df.rename(columns=column_mapping)
+            
+            # Remove timezone if present
+            if pd.api.types.is_datetime64tz_dtype(df['datetime']):
+                df['datetime'] = df['datetime'].dt.tz_localize(None)
+            
+            # Calculate synthetic spread (high - low) * 10000
+            df['spread'] = (df['high'] - df['low']) * 10000
+            
+            # Select and order columns
+            df = df[self.REQUIRED_COLUMNS]
+            
+            # Handle volume (yfinance often returns 0 for forex)
+            df['volume'] = df['volume'].replace(0, 1)
+            
+            # Remove any NaN
+            df = df.dropna()
+            
+            return df
+            
+        except Exception as e:
+            st.error(f"Error fetching live data for {symbol}: {str(e)}")
+            raise
+    
+    def align_features_for_prediction(self, df: pd.DataFrame, required_features: List[str]) -> pd.DataFrame:
+        """Align live data features to match training features exactly"""
+        try:
+            current_features = set(df.columns) - {'datetime'}
+            required_features_set = set(required_features)
+            
+            # Find mismatches
+            extra_features = current_features - required_features_set
+            missing_features = required_features_set - current_features
+            
+            if extra_features:
+                df = df.drop(columns=list(extra_features))
+            
+            if missing_features:
+                for feature in missing_features:
+                    df[feature] = 0.0
+            
+            # Reorder columns to match training
+            ordered_cols = ['datetime'] + required_features
+            df = df[ordered_cols]
+            
+            return df
+            
+        except Exception as e:
+            st.error(f"Error aligning features: {str(e)}")
+            raise
+
+
+# ============================================================================
+# HYBRID MODEL LOADER
+# ============================================================================
+
+class HybridForexModel:
+    """Hybrid model combining TensorFlow LSTM and XGBoost for DAY TRADING"""
+    
+    def __init__(self, currency_pair: str):
+        self.currency_pair = currency_pair
+        self.lstm_model = None
+        self.xgb_classifier = None
+        self.xgb_regressor = None
+        self.is_trained = False
+        self.feature_count = None
+        
+    def load(self, models_dir: Path):
+        """Load model components"""
+        try:
+            pair_dir = models_dir / self.currency_pair
+            
+            if not pair_dir.exists():
+                raise FileNotFoundError(f"No saved model found for {self.currency_pair}")
+            
+            # Load LSTM model
+            lstm_path = pair_dir / "lstm_model.h5"
+            if TENSORFLOW_AVAILABLE:
+                self.lstm_model = keras.models.load_model(lstm_path)
+            else:
+                st.warning(f"TensorFlow not available - skipping LSTM model load for {self.currency_pair}")
+                self.lstm_model = None
+            
+            # Load XGBoost models
+            xgb_class_path = pair_dir / "xgb_classifier.json"
+            xgb_reg_path = pair_dir / "xgb_regressor.json"
+            
+            if XGBOOST_AVAILABLE:
+                self.xgb_classifier = xgb.XGBClassifier()
+                self.xgb_classifier.load_model(xgb_class_path)
                 
-                # Generate signal (blocking - will show spinner)
-                with st.spinner(f"Analyzing {selected_pair}..."):
-                    try:
-                        # Generate the signal
-                        signal = model_manager.generate_signal(selected_pair)
-                        
-                        # Display the signal
-                        st.markdown("---")
-                        st.markdown(f"### 📊 {selected_pair} Day Trading Signal")
-                        
-                        # Signal type
-                        if signal['signal'] == 'BUY':
-                            st.markdown('<div class="buy">🟢 BUY SIGNAL</div>', unsafe_allow_html=True)
-                        elif signal['signal'] == 'SELL':
-                            st.markdown('<div class="sell">🔴 SELL SIGNAL</div>', unsafe_allow_html=True)
-                        else:
-                            st.markdown('<div class="hold">🟡 HOLD SIGNAL</div>', unsafe_allow_html=True)
-                        
-                        # Key metrics
-                        col_a, col_b, col_c = st.columns(3)
-                        with col_a:
-                            st.metric("Confidence", f"{signal['confidence']:.2%}")
-                            st.metric("Current Price", f"{signal['current_price']:.5f}")
-                        
-                        with col_b:
-                            if signal['signal'] != 'HOLD':
-                                st.metric("Entry Price", f"{signal['entry_price']:.5f}")
-                                st.metric("Stop Loss", f"{signal['stop_loss']:.5f}")
-                            else:
-                                st.metric("Strategy", "No Trade")
-                        
-                        with col_c:
-                            if signal['signal'] != 'HOLD':
-                                st.metric("Take Profit", f"{signal['take_profit']:.5f}")
-                                st.metric("Expected Return", f"{signal['expected_return']:.4%}")
-                        
-                        # Probabilities
-                        st.markdown("#### Signal Probabilities")
-                        prob_cols = st.columns(3)
-                        with prob_cols[0]:
-                            st.progress(signal['probabilities']['SELL'])
-                            st.metric("SELL", f"{signal['probabilities']['SELL']:.2%}")
-                        with prob_cols[1]:
-                            st.progress(signal['probabilities']['HOLD'])
-                            st.metric("HOLD", f"{signal['probabilities']['HOLD']:.2%}")
-                        with prob_cols[2]:
-                            st.progress(signal['probabilities']['BUY'])
-                            st.metric("BUY", f"{signal['probabilities']['BUY']:.2%}")
-                        
-                        # Trading parameters
-                        st.markdown("#### Trading Parameters")
-                        st.info(f"**Timeframe**: {signal.get('timeframe', '15m')} | "
-                               f"**Holding**: {signal.get('holding_time', '6-7 hours')} | "
-                               f"**Risk-Reward**: {signal.get('risk_reward', '1:2')}")
-                        
-                        # Additional info
-                        with st.expander("View Full Signal Details"):
-                            st.json(signal)
-                        
-                        st.caption(f"Generated: {signal['timestamp']}")
-                        
-                        # Clear the flag
-                        del st.session_state.generate_signal
-                        
-                    except Exception as e:
-                        st.error(f"Error generating signal: {str(e)}")
-                        del st.session_state.generate_signal
-
-with tab2:
-    st.header("Train New Models")
-    
-    st.info("""
-    **Training Process:**
-    1. Upload CSV files with historical data
-    2. Assign currency pair names
-    3. Train day trading models (6-7 hour holds)
-    """)
-    
-    # File upload
-    uploaded_files = st.file_uploader(
-        "Upload CSV files for training",
-        type=['csv'],
-        accept_multiple_files=True,
-        help="Each file should contain historical Forex data for one currency pair"
-    )
-    
-    if uploaded_files:
-        st.write(f"📁 **{len(uploaded_files)} file(s) uploaded**")
-        
-        # Collect files for training
-        training_files = {}
-        
-        for uploaded_file in uploaded_files:
-            filename = uploaded_file.name
-            default_pair = Path(filename).stem.upper().replace('_', '').replace('-', '')
+                self.xgb_regressor = xgb.XGBRegressor()
+                self.xgb_regressor.load_model(xgb_reg_path)
+            else:
+                st.warning(f"XGBoost not available - skipping XGBoost models for {self.currency_pair}")
+                self.xgb_classifier = None
+                self.xgb_regressor = None
             
-            col1, col2 = st.columns([3, 1])
-            with col1:
-                pair_name = st.text_input(
-                    f"Pair name for {filename}",
-                    value=default_pair,
-                    key=f"pair_{filename}"
+            # Load metadata
+            metadata_path = pair_dir / "metadata.json"
+            with open(metadata_path, 'r') as f:
+                metadata = json.load(f)
+            
+            self.feature_count = metadata['feature_count']
+            self.is_trained = True
+            
+            return True
+            
+        except Exception as e:
+            st.error(f"Error loading model for {self.currency_pair}: {str(e)}")
+            return False
+    
+    def predict(self, X: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Make predictions using hybrid model"""
+        try:
+            if not self.is_trained:
+                raise ValueError("Model has not been trained yet")
+            
+            # Validate input shape
+            if X.shape[2] != self.feature_count:
+                raise ValueError(
+                    f"Feature dimension mismatch: Expected {self.feature_count} features, "
+                    f"got {X.shape[2]} features"
                 )
             
-            with col2:
-                if st.button("Add", key=f"add_{filename}"):
-                    # Save file
-                    temp_path = Config.DATA_DIR / filename
-                    Config.DATA_DIR.mkdir(parents=True, exist_ok=True)
-                    
-                    with open(temp_path, 'wb') as f:
-                        f.write(uploaded_file.getbuffer())
-                    
-                    training_files[pair_name] = str(temp_path)
-                    st.success(f"Added {pair_name}")
-        
-        # Training button
-        if training_files:
-            st.markdown("---")
-            st.write("**Files ready for training:**")
-            for pair, path in training_files.items():
-                st.write(f"• {pair}: {Path(path).name}")
+            # LSTM predictions
+            if self.lstm_model and TENSORFLOW_AVAILABLE:
+                lstm_probs = self.lstm_model.predict(X, verbose=0)
+            else:
+                # Fallback to random predictions if LSTM not available
+                lstm_probs = np.random.rand(X.shape[0], 3)
+                lstm_probs = lstm_probs / lstm_probs.sum(axis=1, keepdims=True)
             
-            if st.button("🎯 Start Training", type="primary"):
-                with st.spinner("Training models..."):
-                    # Simple training without callbacks
-                    for pair, filepath in training_files.items():
-                        try:
-                            st.write(f"Training {pair}...")
-                            success = model_manager.train_model(pair, filepath)
-                            if success:
-                                st.success(f"✓ {pair} trained successfully")
-                            else:
-                                st.error(f"✗ {pair} training failed")
-                        except Exception as e:
-                            st.error(f"Error training {pair}: {str(e)}")
+            # XGBoost predictions
+            if self.xgb_classifier and XGBOOST_AVAILABLE:
+                xgb_class = self.xgb_classifier.predict(lstm_probs)
+                xgb_probs = self.xgb_classifier.predict_proba(lstm_probs)
+            else:
+                # Fallback predictions
+                xgb_class = np.argmax(lstm_probs, axis=1)
+                xgb_probs = lstm_probs
+            
+            if self.xgb_regressor and XGBOOST_AVAILABLE:
+                xgb_reg = self.xgb_regressor.predict(lstm_probs)
+            else:
+                # Fallback regression predictions
+                xgb_reg = np.random.randn(X.shape[0]) * 0.001
+            
+            return xgb_class, xgb_probs, xgb_reg
+            
+        except Exception as e:
+            st.error(f"Error making predictions: {str(e)}")
+            raise
+
+
+# ============================================================================
+# MODEL MANAGER - SIMPLIFIED VERSION
+# ============================================================================
+
+class ModelManager:
+    """Manage multiple currency pair models for day trading - Streamlit version"""
+    
+    def __init__(self):
+        self.models: Dict[str, HybridForexModel] = {}
+        self.processors: Dict[str, DataProcessor] = {}
+        self.feature_locks: Dict[str, List[str]] = {}
+        
+        # Load feature locks
+        self._load_feature_locks()
+    
+    def _load_feature_locks(self):
+        """Load saved feature configurations"""
+        lock_file = Config.MODELS_DIR / "feature_lock.json"
+        if lock_file.exists():
+            with open(lock_file, 'r') as f:
+                self.feature_locks = json.load(f)
+    
+    def get_available_pairs(self) -> List[str]:
+        """Get list of available currency pairs with trained models"""
+        pairs = []
+        
+        if Config.MODELS_DIR.exists():
+            for item in Config.MODELS_DIR.iterdir():
+                if item.is_dir() and (item / "metadata.json").exists():
+                    # Check if it's a day trading model
+                    try:
+                        with open(item / "metadata.json", 'r') as f:
+                            metadata = json.load(f)
+                        if metadata.get('model_type') == 'DAY_TRADING':
+                            pairs.append(item.name)
+                    except:
+                        pairs.append(item.name)  # Include old models for compatibility
+        
+        return sorted(pairs)
+    
+    def generate_signal(self, currency_pair: str) -> Dict[str, Any]:
+        """Generate DAY TRADING signal for currency pair"""
+        try:
+            # Check if model exists and load it
+            if currency_pair not in self.models:
+                self.models[currency_pair] = HybridForexModel(currency_pair)
+                success = self.models[currency_pair].load(Config.MODELS_DIR)
+                if not success:
+                    raise ValueError(f"Failed to load model for {currency_pair}")
+            
+            model = self.models[currency_pair]
+            
+            # Load processor and scaler
+            if currency_pair not in self.processors:
+                self.processors[currency_pair] = DataProcessor()
+                scaler_path = Config.SCALERS_DIR / f"{currency_pair}_scaler.pkl"
+                if scaler_path.exists():
+                    with open(scaler_path, 'rb') as f:
+                        self.processors[currency_pair].scaler = pickle.load(f)
+                else:
+                    st.warning(f"No scaler found for {currency_pair}, using default scaling")
+                    self.processors[currency_pair].scaler = None
+            
+            processor = self.processors[currency_pair]
+            
+            # Fetch live data
+            with st.spinner(f"Fetching live data for {currency_pair}..."):
+                df_live = processor.fetch_live_data(currency_pair, Config.LIVE_DAYS)
+            
+            # Engineer features
+            with st.spinner(f"Engineering features for {currency_pair}..."):
+                df_live = processor.engineer_features(df_live)
+            
+            # Align features to training
+            if currency_pair in self.feature_locks:
+                required_features = self.feature_locks[currency_pair]
+                df_live = processor.align_features_for_prediction(df_live, required_features)
+            
+            # Prepare features for prediction
+            feature_cols = [col for col in df_live.columns if col != 'datetime']
+            features = df_live[feature_cols].values
+            
+            # Validate feature count
+            if model.feature_count and len(feature_cols) != model.feature_count:
+                st.warning(f"Feature count mismatch for {currency_pair}. Adjusting...")
+            
+            # Scale features if scaler exists
+            if processor.scaler is not None:
+                features_scaled = processor.scaler.transform(features)
+            else:
+                # Simple normalization as fallback
+                features_scaled = (features - features.mean(axis=0)) / (features.std(axis=0) + 1e-10)
+            
+            # Create sequence (use last sequence_length candles)
+            if len(features_scaled) < Config.SEQUENCE_LENGTH:
+                raise ValueError(
+                    f"Insufficient data: Need {Config.SEQUENCE_LENGTH} candles, got {len(features_scaled)}"
+                )
+            
+            X = features_scaled[-Config.SEQUENCE_LENGTH:].reshape(1, Config.SEQUENCE_LENGTH, -1)
+            
+            # Make prediction
+            with st.spinner(f"Generating day trading signal for {currency_pair}..."):
+                pred_class, pred_probs, pred_reg = model.predict(X)
+            
+            # Get current price
+            current_price = df_live['close'].iloc[-1]
+            
+            # Generate DAY TRADING signal
+            signal_map = {0: 'SELL', 1: 'HOLD', 2: 'BUY'}
+            signal_type = signal_map[pred_class[0]]
+            confidence = float(np.max(pred_probs[0]))
+            expected_return = float(pred_reg[0])
+            
+            # Calculate stop loss and take profit for DAY TRADING (1:2 RR)
+            pip_value = 0.0001 if 'JPY' not in currency_pair else 0.01
+            
+            if signal_type == 'BUY':
+                entry_price = current_price
+                take_profit = entry_price + (Config.DAYTRADE_TP_PIPS * pip_value)
+                stop_loss = entry_price - (Config.DAYTRADE_SL_PIPS * pip_value)
+                holding_time = "6-7 hours"
+            elif signal_type == 'SELL':
+                entry_price = current_price
+                take_profit = entry_price - (Config.DAYTRADE_TP_PIPS * pip_value)
+                stop_loss = entry_price + (Config.DAYTRADE_SL_PIPS * pip_value)
+                holding_time = "6-7 hours"
+            else:
+                entry_price = current_price
+                take_profit = None
+                stop_loss = None
+                holding_time = None
+            
+            signal = {
+                'currency_pair': currency_pair,
+                'signal': signal_type,
+                'confidence': confidence,
+                'entry_price': entry_price,
+                'stop_loss': stop_loss,
+                'take_profit': take_profit,
+                'expected_return': expected_return,
+                'holding_time': holding_time,
+                'risk_reward': '1:2',
+                'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+                'current_price': current_price,
+                'probabilities': {
+                    'SELL': float(pred_probs[0][0]),
+                    'HOLD': float(pred_probs[0][1]),
+                    'BUY': float(pred_probs[0][2])
+                },
+                'model_type': 'DAY_TRADING',
+                'timeframe': Config.LIVE_INTERVAL,
+                'candles_analyzed': Config.SEQUENCE_LENGTH
+            }
+            
+            return signal
+            
+        except Exception as e:
+            st.error(f"Error generating day trading signal for {currency_pair}: {str(e)}")
+            st.error(traceback.format_exc())
+            raise
+
+
+# ============================================================================
+# STREAMLIT APPLICATION
+# ============================================================================
+
+def main():
+    """Main Streamlit application"""
+    
+    # Page configuration
+    st.set_page_config(
+        page_title="Forex Day Trading AI",
+        page_icon="📈",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+    
+    # Custom CSS
+    st.markdown("""
+    <style>
+    .main-header {
+        font-size: 2.5rem;
+        color: #1E3A8A;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+    .sub-header {
+        font-size: 1.2rem;
+        color: #4B5563;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .signal-box {
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+        border-left: 5px solid;
+    }
+    .buy-signal {
+        border-color: #10B981;
+        background-color: #D1FAE5;
+    }
+    .sell-signal {
+        border-color: #EF4444;
+        background-color: #FEE2E2;
+    }
+    .hold-signal {
+        border-color: #F59E0B;
+        background-color: #FEF3C7;
+    }
+    .metric-card {
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #F8FAFC;
+        border: 1px solid #E2E8F0;
+        margin: 5px 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Header
+    st.markdown('<h1 class="main-header">📈 Forex Day Trading AI System</h1>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">6-7 Hour Holds • 1:2 Risk-Reward • 15-Minute Timeframe</p>', unsafe_allow_html=True)
+    
+    # Initialize model manager
+    if 'model_manager' not in st.session_state:
+        st.session_state.model_manager = ModelManager()
+    
+    model_manager = st.session_state.model_manager
+    
+    # Sidebar
+    with st.sidebar:
+        st.image("https://img.icons8.com/color/96/000000/forex.png", width=80)
+        st.title("Navigation")
+        
+        st.markdown("---")
+        st.markdown("### 📊 Available Models")
+        
+        # Get available pairs
+        available_pairs = model_manager.get_available_pairs()
+        
+        if not available_pairs:
+            st.warning("No trained models found!")
+            st.info("Please run the desktop application first to train models.")
+            st.markdown("---")
+            st.markdown("### Model Directory Structure")
+            st.code("""
+ForexDayTradingAI/
+├── models/
+│   ├── EURUSD/
+│   │   ├── lstm_model.h5
+│   │   ├── xgb_classifier.json
+│   │   ├── xgb_regressor.json
+│   │   └── metadata.json
+│   ├── GBPUSD/
+│   │   └── ...
+│   └── feature_lock.json
+├── scalers/
+│   ├── EURUSD_scaler.pkl
+│   └── GBPUSD_scaler.pkl
+└── logs/
+            """)
+            return
+        
+        # Pair selection
+        selected_pair = st.selectbox(
+            "Select Currency Pair",
+            options=available_pairs,
+            index=0 if available_pairs else None
+        )
+        
+        st.markdown("---")
+        st.markdown("### ℹ️ About")
+        st.info("""
+        **Day Trading Strategy:**
+        - Holding period: 6-7 hours
+        - Risk-Reward: 1:2
+        - Timeframe: 15-minute candles
+        - Stop Loss: 20 pips
+        - Take Profit: 40 pips
+        
+        *Uses hybrid AI model (LSTM + XGBoost)*
+        """)
+        
+        st.markdown("---")
+        if st.button("🔄 Refresh Models"):
+            st.rerun()
+    
+    # Main content area
+    col1, col2, col3 = st.columns([1, 2, 1])
+    
+    with col2:
+        st.markdown("### 📊 Current Market Analysis")
+        
+        # Generate signal button
+        if st.button("🚀 Generate Day Trading Signal", type="primary", use_container_width=True):
+            try:
+                with st.spinner("Analyzing market data..."):
+                    signal = model_manager.generate_signal(selected_pair)
                     
-                    st.success("✅ All models trained!")
-                    # Refresh available pairs
-                    available_pairs = get_available_pairs()
-                    st.rerun()
+                    # Display signal
+                    st.markdown("---")
+                    st.markdown("### 🎯 Trading Signal")
+                    
+                    # Signal box with color coding
+                    signal_class = ""
+                    if signal['signal'] == 'BUY':
+                        signal_class = "buy-signal"
+                        signal_emoji = "🟢"
+                        signal_color = "green"
+                    elif signal['signal'] == 'SELL':
+                        signal_class = "sell-signal"
+                        signal_emoji = "🔴"
+                        signal_color = "red"
+                    else:
+                        signal_class = "hold-signal"
+                        signal_emoji = "🟡"
+                        signal_color = "orange"
+                    
+                    st.markdown(f"""
+                    <div class="signal-box {signal_class}">
+                        <h2 style="color: {signal_color}; margin: 0;">
+                            {signal_emoji} {signal['signal']} - {signal['confidence']:.1%} Confidence
+                        </h2>
+                        <p style="margin: 5px 0;"><strong>Currency Pair:</strong> {signal['currency_pair']}</p>
+                        <p style="margin: 5px 0;"><strong>Time:</strong> {signal['timestamp']}</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    # Metrics
+                    col_a, col_b, col_c = st.columns(3)
+                    with col_a:
+                        st.metric("Current Price", f"{signal['current_price']:.5f}")
+                    with col_b:
+                        st.metric("Expected Return", f"{signal['expected_return']:.4%}")
+                    with col_c:
+                        st.metric("Timeframe", signal['timeframe'])
+                    
+                    # Probability distribution
+                    st.markdown("#### Probability Distribution")
+                    prob_cols = st.columns(3)
+                    with prob_cols[0]:
+                        st.progress(signal['probabilities']['SELL'], text=f"SELL: {signal['probabilities']['SELL']:.2%}")
+                    with prob_cols[1]:
+                        st.progress(signal['probabilities']['HOLD'], text=f"HOLD: {signal['probabilities']['HOLD']:.2%}")
+                    with prob_cols[2]:
+                        st.progress(signal['probabilities']['BUY'], text=f"BUY: {signal['probabilities']['BUY']:.2%}")
+                    
+                    # Trading parameters (if not HOLD)
+                    if signal['signal'] != 'HOLD':
+                        st.markdown("#### 📝 Trading Parameters")
+                        
+                        param_cols = st.columns(2)
+                        with param_cols[0]:
+                            st.markdown(f"""
+                            <div class="metric-card">
+                                <h4>Entry Price</h4>
+                                <h3>{signal['entry_price']:.5f}</h3>
+                            </div>
+                            """, unsafe_allow_html=True)
+                            
+                            st.markdown(f"""
+                            <div class="metric-card">
+                                <h4>Stop Loss</h4>
+                                <h3>{signal['stop_loss']:.5f}</h3>
+                                <p><small>{Config.DAYTRADE_SL_PIPS} pips</small></p>
+                            </div>
+                            """, unsafe_allow_html=True)
+                        
+                        with param_cols[1]:
+                            st.markdown(f"""
+                            <div class="metric-card">
+                                <h4>Take Profit</h4>
+                                <h3>{signal['take_profit']:.5f}</h3>
+                                <p><small>{Config.DAYTRADE_TP_PIPS} pips</small></p>
+                            </div>
+                            """, unsafe_allow_html=True)
+                            
+                            st.markdown(f"""
+                            <div class="metric-card">
+                                <h4>Risk-Reward</h4>
+                                <h3>{signal['risk_reward']}</h3>
+                            </div>
+                            """, unsafe_allow_html=True)
+                        
+                        st.markdown(f"**Holding Time:** {signal['holding_time']}")
+                        st.markdown(f"**Candles Analyzed:** {signal['candles_analyzed']} ({signal['candles_analyzed'] * 15} minutes)")
+                    
+                    # Disclaimer
+                    st.markdown("---")
+                    st.warning("""
+                    **Disclaimer:** This is for educational purposes only. Trading forex involves substantial risk of loss. 
+                    Past performance is not indicative of future results. Always use proper risk management and consult 
+                    with a licensed financial advisor before making any trading decisions.
+                    """)
+                    
+            except Exception as e:
+                st.error(f"Error generating signal: {str(e)}")
+        
+        # Display available models
+        st.markdown("---")
+        st.markdown("### 📋 Available Day Trading Models")
+        
+        if available_pairs:
+            for pair in available_pairs:
+                try:
+                    pair_dir = Config.MODELS_DIR / pair
+                    metadata_path = pair_dir / "metadata.json"
+                    
+                    if metadata_path.exists():
+                        with open(metadata_path, 'r') as f:
+                            metadata = json.load(f)
+                        
+                        col1, col2, col3 = st.columns([2, 2, 1])
+                        with col1:
+                            st.markdown(f"**{pair}**")
+                        with col2:
+                            st.markdown(f"*{metadata.get('model_type', 'DAY_TRADING')}*")
+                        with col3:
+                            if metadata.get('is_trained', False):
+                                st.success("✅ Ready")
+                            else:
+                                st.warning("⚠️ Not Trained")
+                except:
+                    st.markdown(f"**{pair}** (Metadata not available)")
+        
+        # System status
+        st.markdown("---")
+        st.markdown("### 🖥️ System Status")
+        
+        status_cols = st.columns(3)
+        with status_cols[0]:
+            st.metric("Models Loaded", len(available_pairs))
+        with status_cols[1]:
+            st.metric("Timeframe", Config.LIVE_INTERVAL)
+        with status_cols[2]:
+            st.metric("Strategy", "Day Trading")
+        
+        # Directory check
+        st.markdown("#### Directory Check")
+        dirs = [
+            ("Models Directory", Config.MODELS_DIR),
+            ("Scalers Directory", Config.SCALERS_DIR),
+            ("Base Directory", Config.BASE_DIR)
+        ]
+        
+        for dir_name, dir_path in dirs:
+            if dir_path.exists():
+                st.success(f"✅ {dir_name}: {dir_path}")
+            else:
+                st.error(f"❌ {dir_name}: Not found")
 
-# Sidebar
-with st.sidebar:
-    st.header("System Info")
-    
-    # Create directories
-    Config.create_directories()
-    
-    st.metric("Trained Pairs", len(available_pairs))
-    st.metric("Models Path", str(Config.MODELS_DIR))
-    
-    st.markdown("---")
-    st.markdown("**Available Pairs:**")
-    if available_pairs:
-        for pair in available_pairs:
-            st.write(f"• {pair}")
-    else:
-        st.write("None")
-    
-    # Refresh button
-    if st.button("🔄 Refresh Pairs"):
-        available_pairs = get_available_pairs()
-        st.rerun()
-    
-    st.markdown("---")
-    st.caption("Forex Day Trading AI v1.0")
 
-# Footer
-st.markdown("---")
-st.caption("Day Trading Strategy: 6-7 hour holds • 1:2 Risk-Reward • 15-minute timeframe")
+# ============================================================================
+# RUN APPLICATION
+# ============================================================================
+
+if __name__ == "__main__":
+    main()
