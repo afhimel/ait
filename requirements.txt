@@ -1,17 +1,7 @@
-# Web Framework
 streamlit
-
-# Data Processing
 numpy
 pandas
-
-# Machine Learning & AI
 tensorflow-cpu
 xgboost
 scikit-learn
-
-# Financial Data
 yfinance
-
-# Utils
-pathlib
