@@ -435,21 +435,27 @@ class DataProcessor:
 # HYBRID MODEL (TENSORFLOW LSTM + XGBOOST) - DAY TRADING OPTIMIZED
 # ============================================================================
 
-class HybridForexModel:
-    """Hybrid model combining TensorFlow LSTM and XGBoost for DAY TRADING"""
-    
-    def __init__(self, currency_pair: str, sequence_length: int = None):
-        if sequence_length is None:
-            sequence_length = Config.SEQUENCE_LENGTH
-            
-        self.currency_pair = currency_pair
-        self.sequence_length = sequence_length
+class HybridForexModel(BaseEstimator, RegressorMixin, ClassifierMixin):
+    """
+    Hybrid AI model combining LSTM for sequence learning and XGBoost for classification/regression.
+    Inherits from BaseEstimator and Mixins to fix the _estimator_type error.
+    """
+    def __init__(self, model_type='classifier'):
+        # Core identification
+        self.model_type = model_type
+        
+        # Model placeholders
         self.lstm_model = None
-        self.xgb_classifier = None
-        self.xgb_regressor = None
-        self.history = {'loss': [], 'val_loss': [], 'accuracy': [], 'val_accuracy': []}
-        self.is_trained = False
-        self.feature_count = None
+        self.xgb_model = None
+        
+        # Explicitly define estimator type for Scikit-learn compatibility
+        if model_type == 'regressor':
+            self._estimator_type = "regressor"
+        else:
+            self._estimator_type = "classifier"
+            
+        # Logging initialization
+        logger.info(f"Initialized HybridForexModel as {self._estimator_type}")
         
     def build_lstm_model(self, input_shape: Tuple[int, int]):
         """Build LSTM model architecture optimized for day trading patterns"""
@@ -1306,3 +1312,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
