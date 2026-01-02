@@ -1,0 +1,122 @@
+# ==================================================
+# FOREX DAY TRADING AI SYSTEM - COMPLETE REQUIREMENTS
+# ==================================================
+# Python 3.8+ required
+# Run: pip install -r requirements.txt
+# ==================================================
+
+# ======================
+# CORE DATA SCIENCE STACK
+# ======================
+numpy==1.24.3
+pandas==2.0.3
+scipy==1.11.1  # For advanced statistics
+
+# ======================
+# MACHINE LEARNING
+# ======================
+scikit-learn==1.3.0
+xgboost==1.7.6
+lightgbm==4.0.0  # Alternative to XGBoost
+catboost==1.2.2  # For categorical features
+tensorflow==2.13.0
+
+# ======================
+# DEEP LEARNING EXTRAS
+# ======================
+keras-tuner==1.3.5  # For hyperparameter tuning
+keras==2.13.1
+tensorboard==2.13.0  # For training visualization
+
+# ======================
+# FINANCIAL DATA
+# ======================
+yfinance==0.2.28
+pandas-ta==0.3.14b0  # Technical analysis indicators
+ta==0.10.2  # Alternative technical analysis library
+mplfinance==0.12.9b7  # Financial charting
+ccxt==4.1.32  # Crypto exchange data (if needed)
+
+# ======================
+# TIME SERIES ANALYSIS
+# ======================
+statsmodels==0.14.0  # Statistical models
+arch==6.2.0  # Volatility modeling
+prophet==1.1.4  # Facebook's forecasting
+
+# ======================
+# VISUALIZATION
+# ======================
+matplotlib==3.7.2
+seaborn==0.12.2
+plotly==5.15.0  # Interactive charts
+cufflinks==0.17.3  # Plotly+pandas integration
+bokeh==3.2.1  # Web visualizations
+
+# ======================
+# DATA PROCESSING & OPTIMIZATION
+# ======================
+joblib==1.3.1  # Parallel processing
+dask==2023.8.1  # Parallel computing
+numba==0.57.1  # JIT compilation for speed
+polars==0.19.3  # Faster alternative to pandas
+
+# ======================
+# FEATURE ENGINEERING
+# ======================
+tsfresh==0.20.1  # Time series features
+feature-engine==1.6.1  # Feature engineering
+category-encoders==2.6.1  # Categorical encoding
+imbalanced-learn==0.11.0  # Handle imbalanced data
+
+# ======================
+# GUI & APPLICATION
+# ======================
+customtkinter==5.2.0  # Modern tkinter
+ttkbootstrap==1.10.1  # Bootstrap themes for tkinter
+Pillow==10.0.0  # Image processing for GUI
+pyautogui==0.9.54  # Automation (optional)
+
+# ======================
+# DATABASE & STORAGE
+# ======================
+sqlalchemy==2.0.19  # Database ORM
+psycopg2-binary==2.9.7  # PostgreSQL adapter
+redis==5.0.1  # Caching
+pickle5==0.0.12  # Better pickle for Python 3.8+
+
+# ======================
+# API & WEB
+# ======================
+requests==2.31.0
+fastapi==0.103.1  # API server (optional)
+uvicorn==0.23.2  # ASGI server
+websockets==12.0  # Real-time data
+
+# ======================
+# UTILITIES & LOGGING
+# ======================
+tqdm==4.65.0  # Progress bars
+colorlog==6.7.0  # Colored logging
+loguru==0.7.2  # Better logging
+python-dotenv==1.0.0  # Environment variables
+configparser==6.0.0  # Configuration files
+pydantic==2.3.0  # Data validation
+
+# ======================
+# TESTING & DEVELOPMENT
+# ======================
+pytest==7.4.2
+pytest-cov==4.1.0
+black==23.9.1  # Code formatting
+flake8==6.1.0  # Linting
+mypy==1.5.1  # Type checking
+jupyter==1.0.0  # Notebooks
+
+# ======================
+# PERFORMANCE MONITORING
+# ======================
+memory-profiler==0.61.0
+line-profiler==4.0.3
+psutil==5.9.5  # System monitoring
+pyinstrument==4.6.2  # Profiler
